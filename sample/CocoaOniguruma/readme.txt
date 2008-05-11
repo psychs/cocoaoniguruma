@@ -52,7 +52,7 @@ Follow the steps to use CocoaOniguruma in your project.
 
 * The Author
 
-Satoshi Nakagawa <artension AT gmail DOT com>
+Satoshi Nakagawa <psychs AT limechat DOT net>
 http://d.hatena.ne.jp/Psychs/ (in Japanese)
 #limechat on irc.freenode.net
 
@@ -62,7 +62,7 @@ See also the Oniguruma's COPYING file.
 
 The revised BSD license
 
-Copyright (c) 2008  Satoshi Nakagawa  <artension AT gmail DOT com>
+Copyright (c) 2008  Satoshi Nakagawa  <psychs AT limechat DOT net>
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
