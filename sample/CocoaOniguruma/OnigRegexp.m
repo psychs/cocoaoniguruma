@@ -4,7 +4,7 @@
 #import "OnigRegexp.h"
 
 #define CHAR_SIZE 2
-#define STRING_ENCODNING NSUTF16LittleEndianStringEncoding
+#define STRING_ENCODING NSUTF16LittleEndianStringEncoding
 #define ONIG_ENCODING ONIG_ENCODING_UTF16_LE
 
 @interface OnigResult (Private)
@@ -55,7 +55,7 @@
   
   OnigErrorInfo err;
   regex_t* entity = 0;
-  const UChar* str = (const UChar*)[expression cStringUsingEncoding:STRING_ENCODNING];
+  const UChar* str = (const UChar*)[expression cStringUsingEncoding:STRING_ENCODING];
 
   int status = onig_new(&entity,
                           str,
@@ -89,7 +89,7 @@
   if (end < 0) end = [target length];
   
   OnigRegion* region = onig_region_new();
-  const UChar* str = (const UChar*)[target cStringUsingEncoding:STRING_ENCODNING];
+  const UChar* str = (const UChar*)[target cStringUsingEncoding:STRING_ENCODING];
   
   int status = onig_search(_entity,
                             str,
@@ -122,7 +122,7 @@
   if (!target) return nil;
 
   OnigRegion* region = onig_region_new();
-  const UChar* str = (const UChar*)[target cStringUsingEncoding:STRING_ENCODNING];
+  const UChar* str = (const UChar*)[target cStringUsingEncoding:STRING_ENCODING];
   
   int status = onig_match(_entity,
                             str,
@@ -242,7 +242,7 @@
   int len = sizeof(int) * [self size];
   int* buf = alloca(len);
   memset(&buf, 0, len);
-  const UChar* str = (const UChar*)[name cStringUsingEncoding:STRING_ENCODNING];
+  const UChar* str = (const UChar*)[name cStringUsingEncoding:STRING_ENCODING];
   
   int num = onig_name_to_group_numbers([_expression entity], str, str + [name length] * CHAR_SIZE, &buf);
   if (num < 0) return nil;

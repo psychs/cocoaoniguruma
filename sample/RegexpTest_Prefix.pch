@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'RejawRadar' target in the 'RejawRadar' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
