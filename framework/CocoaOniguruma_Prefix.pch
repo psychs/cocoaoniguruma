@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'CocoaOniguruma' target in the 'CocoaOniguruma' project.
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
