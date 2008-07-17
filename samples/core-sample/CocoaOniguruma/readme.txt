@@ -27,7 +27,7 @@ You can see "framework" directory next to "core" directory.
 6. Double click on the application target and add a "New Copy Files Build Phase".
 7. Drag "CocoaOniguruma.framework" into the new "Copy Files" phase.
 8. Import the header file, so you can use CocoaOniguruma.
-    #import "OnigRegexp.h"
+    #import "CocoaOniguruma/OnigRegexp.h"
 
 * The Author
 
