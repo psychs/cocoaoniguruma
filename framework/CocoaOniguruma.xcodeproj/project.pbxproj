@@ -14,10 +14,7 @@
 		7807AC3C0E2FBB8600A5AB6A /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 7807AC1F0E2FBB8600A5AB6A /* config.h */; };
 		7807AC3E0E2FBB8600A5AB6A /* ascii.c in Sources */ = {isa = PBXBuildFile; fileRef = 7807AC220E2FBB8600A5AB6A /* ascii.c */; };
 		7807AC3F0E2FBB8600A5AB6A /* unicode.c in Sources */ = {isa = PBXBuildFile; fileRef = 7807AC230E2FBB8600A5AB6A /* unicode.c */; };
-		7807AC400E2FBB8600A5AB6A /* utf16_be.c in Sources */ = {isa = PBXBuildFile; fileRef = 7807AC240E2FBB8600A5AB6A /* utf16_be.c */; };
 		7807AC410E2FBB8600A5AB6A /* utf16_le.c in Sources */ = {isa = PBXBuildFile; fileRef = 7807AC250E2FBB8600A5AB6A /* utf16_le.c */; };
-		7807AC420E2FBB8600A5AB6A /* utf32_be.c in Sources */ = {isa = PBXBuildFile; fileRef = 7807AC260E2FBB8600A5AB6A /* utf32_be.c */; };
-		7807AC430E2FBB8600A5AB6A /* utf32_le.c in Sources */ = {isa = PBXBuildFile; fileRef = 7807AC270E2FBB8600A5AB6A /* utf32_le.c */; };
 		7807AC440E2FBB8600A5AB6A /* oniguruma.h in Headers */ = {isa = PBXBuildFile; fileRef = 7807AC280E2FBB8600A5AB6A /* oniguruma.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7807AC450E2FBB8600A5AB6A /* regcomp.c in Sources */ = {isa = PBXBuildFile; fileRef = 7807AC290E2FBB8600A5AB6A /* regcomp.c */; };
 		7807AC460E2FBB8600A5AB6A /* regenc.c in Sources */ = {isa = PBXBuildFile; fileRef = 7807AC2A0E2FBB8600A5AB6A /* regenc.c */; };
@@ -48,10 +45,7 @@
 		7807AC1F0E2FBB8600A5AB6A /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
 		7807AC220E2FBB8600A5AB6A /* ascii.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ascii.c; sourceTree = "<group>"; };
 		7807AC230E2FBB8600A5AB6A /* unicode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unicode.c; sourceTree = "<group>"; };
-		7807AC240E2FBB8600A5AB6A /* utf16_be.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utf16_be.c; sourceTree = "<group>"; };
 		7807AC250E2FBB8600A5AB6A /* utf16_le.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utf16_le.c; sourceTree = "<group>"; };
-		7807AC260E2FBB8600A5AB6A /* utf32_be.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utf32_be.c; sourceTree = "<group>"; };
-		7807AC270E2FBB8600A5AB6A /* utf32_le.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utf32_le.c; sourceTree = "<group>"; };
 		7807AC280E2FBB8600A5AB6A /* oniguruma.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = oniguruma.h; sourceTree = "<group>"; };
 		7807AC290E2FBB8600A5AB6A /* regcomp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regcomp.c; sourceTree = "<group>"; };
 		7807AC2A0E2FBB8600A5AB6A /* regenc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regenc.c; sourceTree = "<group>"; };
@@ -195,10 +189,7 @@
 			children = (
 				7807AC220E2FBB8600A5AB6A /* ascii.c */,
 				7807AC230E2FBB8600A5AB6A /* unicode.c */,
-				7807AC240E2FBB8600A5AB6A /* utf16_be.c */,
 				7807AC250E2FBB8600A5AB6A /* utf16_le.c */,
-				7807AC260E2FBB8600A5AB6A /* utf32_be.c */,
-				7807AC270E2FBB8600A5AB6A /* utf32_le.c */,
 			);
 			path = enc;
 			sourceTree = "<group>";
@@ -281,10 +272,7 @@
 				7807AC3B0E2FBB8600A5AB6A /* OnigRegexpUtility.m in Sources */,
 				7807AC3E0E2FBB8600A5AB6A /* ascii.c in Sources */,
 				7807AC3F0E2FBB8600A5AB6A /* unicode.c in Sources */,
-				7807AC400E2FBB8600A5AB6A /* utf16_be.c in Sources */,
 				7807AC410E2FBB8600A5AB6A /* utf16_le.c in Sources */,
-				7807AC420E2FBB8600A5AB6A /* utf32_be.c in Sources */,
-				7807AC430E2FBB8600A5AB6A /* utf32_le.c in Sources */,
 				7807AC450E2FBB8600A5AB6A /* regcomp.c in Sources */,
 				7807AC460E2FBB8600A5AB6A /* regenc.c in Sources */,
 				7807AC480E2FBB8600A5AB6A /* regerror.c in Sources */,
