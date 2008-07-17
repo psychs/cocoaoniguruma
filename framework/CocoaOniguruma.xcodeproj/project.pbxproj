@@ -3,43 +3,73 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 45;
+	objectVersion = 44;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		781979010E2DA9D8006354CE /* OnigRegexp.h in Headers */ = {isa = PBXBuildFile; fileRef = 781978FD0E2DA9D8006354CE /* OnigRegexp.h */; };
-		781979020E2DA9D8006354CE /* OnigRegexp.m in Sources */ = {isa = PBXBuildFile; fileRef = 781978FE0E2DA9D8006354CE /* OnigRegexp.m */; };
-		781979030E2DA9D8006354CE /* OnigRegexpUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 781978FF0E2DA9D8006354CE /* OnigRegexpUtility.h */; };
-		781979040E2DA9D8006354CE /* OnigRegexpUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 781979000E2DA9D8006354CE /* OnigRegexpUtility.m */; };
-		781979060E2DA9F5006354CE /* libonig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 781979050E2DA9F5006354CE /* libonig.a */; };
+		7807AC380E2FBB8600A5AB6A /* OnigRegexp.h in Headers */ = {isa = PBXBuildFile; fileRef = 7807AC1A0E2FBB8600A5AB6A /* OnigRegexp.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7807AC390E2FBB8600A5AB6A /* OnigRegexp.m in Sources */ = {isa = PBXBuildFile; fileRef = 7807AC1B0E2FBB8600A5AB6A /* OnigRegexp.m */; };
+		7807AC3A0E2FBB8600A5AB6A /* OnigRegexpUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 7807AC1C0E2FBB8600A5AB6A /* OnigRegexpUtility.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7807AC3B0E2FBB8600A5AB6A /* OnigRegexpUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 7807AC1D0E2FBB8600A5AB6A /* OnigRegexpUtility.m */; };
+		7807AC3C0E2FBB8600A5AB6A /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 7807AC1F0E2FBB8600A5AB6A /* config.h */; };
+		7807AC3E0E2FBB8600A5AB6A /* ascii.c in Sources */ = {isa = PBXBuildFile; fileRef = 7807AC220E2FBB8600A5AB6A /* ascii.c */; };
+		7807AC3F0E2FBB8600A5AB6A /* unicode.c in Sources */ = {isa = PBXBuildFile; fileRef = 7807AC230E2FBB8600A5AB6A /* unicode.c */; };
+		7807AC400E2FBB8600A5AB6A /* utf16_be.c in Sources */ = {isa = PBXBuildFile; fileRef = 7807AC240E2FBB8600A5AB6A /* utf16_be.c */; };
+		7807AC410E2FBB8600A5AB6A /* utf16_le.c in Sources */ = {isa = PBXBuildFile; fileRef = 7807AC250E2FBB8600A5AB6A /* utf16_le.c */; };
+		7807AC420E2FBB8600A5AB6A /* utf32_be.c in Sources */ = {isa = PBXBuildFile; fileRef = 7807AC260E2FBB8600A5AB6A /* utf32_be.c */; };
+		7807AC430E2FBB8600A5AB6A /* utf32_le.c in Sources */ = {isa = PBXBuildFile; fileRef = 7807AC270E2FBB8600A5AB6A /* utf32_le.c */; };
+		7807AC440E2FBB8600A5AB6A /* oniguruma.h in Headers */ = {isa = PBXBuildFile; fileRef = 7807AC280E2FBB8600A5AB6A /* oniguruma.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7807AC450E2FBB8600A5AB6A /* regcomp.c in Sources */ = {isa = PBXBuildFile; fileRef = 7807AC290E2FBB8600A5AB6A /* regcomp.c */; };
+		7807AC460E2FBB8600A5AB6A /* regenc.c in Sources */ = {isa = PBXBuildFile; fileRef = 7807AC2A0E2FBB8600A5AB6A /* regenc.c */; };
+		7807AC470E2FBB8600A5AB6A /* regenc.h in Headers */ = {isa = PBXBuildFile; fileRef = 7807AC2B0E2FBB8600A5AB6A /* regenc.h */; };
+		7807AC480E2FBB8600A5AB6A /* regerror.c in Sources */ = {isa = PBXBuildFile; fileRef = 7807AC2C0E2FBB8600A5AB6A /* regerror.c */; };
+		7807AC490E2FBB8600A5AB6A /* regexec.c in Sources */ = {isa = PBXBuildFile; fileRef = 7807AC2D0E2FBB8600A5AB6A /* regexec.c */; };
+		7807AC4A0E2FBB8600A5AB6A /* regext.c in Sources */ = {isa = PBXBuildFile; fileRef = 7807AC2E0E2FBB8600A5AB6A /* regext.c */; };
+		7807AC4B0E2FBB8600A5AB6A /* regint.h in Headers */ = {isa = PBXBuildFile; fileRef = 7807AC2F0E2FBB8600A5AB6A /* regint.h */; };
+		7807AC4C0E2FBB8600A5AB6A /* regparse.c in Sources */ = {isa = PBXBuildFile; fileRef = 7807AC300E2FBB8600A5AB6A /* regparse.c */; };
+		7807AC4D0E2FBB8600A5AB6A /* regparse.h in Headers */ = {isa = PBXBuildFile; fileRef = 7807AC310E2FBB8600A5AB6A /* regparse.h */; };
+		7807AC4E0E2FBB8600A5AB6A /* regsyntax.c in Sources */ = {isa = PBXBuildFile; fileRef = 7807AC320E2FBB8600A5AB6A /* regsyntax.c */; };
+		7807AC4F0E2FBB8600A5AB6A /* regtrav.c in Sources */ = {isa = PBXBuildFile; fileRef = 7807AC330E2FBB8600A5AB6A /* regtrav.c */; };
+		7807AC500E2FBB8600A5AB6A /* regversion.c in Sources */ = {isa = PBXBuildFile; fileRef = 7807AC340E2FBB8600A5AB6A /* regversion.c */; };
+		7807AC510E2FBB8600A5AB6A /* st.c in Sources */ = {isa = PBXBuildFile; fileRef = 7807AC350E2FBB8600A5AB6A /* st.c */; };
+		7807AC520E2FBB8600A5AB6A /* st.h in Headers */ = {isa = PBXBuildFile; fileRef = 7807AC360E2FBB8600A5AB6A /* st.h */; };
+		78B1D1AB0E2FBEA100C857D5 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78B1D1AA0E2FBEA100C857D5 /* Cocoa.framework */; };
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
-		8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		7819791D0E2DAB30006354CE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 781979120E2DAB1B006354CE;
-			remoteInfo = Oniguruma;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0867D69BFE84028FC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
-		0867D6A5FE840307C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		089C1667FE841158C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		32DBCF5E0370ADEE00C91783 /* CocoaOniguruma_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoaOniguruma_Prefix.pch; sourceTree = "<group>"; };
-		781978FD0E2DA9D8006354CE /* OnigRegexp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OnigRegexp.h; path = Source/OnigRegexp.h; sourceTree = "<group>"; };
-		781978FE0E2DA9D8006354CE /* OnigRegexp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OnigRegexp.m; path = Source/OnigRegexp.m; sourceTree = "<group>"; };
-		781978FF0E2DA9D8006354CE /* OnigRegexpUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OnigRegexpUtility.h; path = Source/OnigRegexpUtility.h; sourceTree = "<group>"; };
-		781979000E2DA9D8006354CE /* OnigRegexpUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OnigRegexpUtility.m; path = Source/OnigRegexpUtility.m; sourceTree = "<group>"; };
-		781979050E2DA9F5006354CE /* libonig.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libonig.a; path = Source/oniguruma/universal/libonig.a; sourceTree = "<group>"; };
+		7807AC1A0E2FBB8600A5AB6A /* OnigRegexp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnigRegexp.h; sourceTree = "<group>"; };
+		7807AC1B0E2FBB8600A5AB6A /* OnigRegexp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnigRegexp.m; sourceTree = "<group>"; };
+		7807AC1C0E2FBB8600A5AB6A /* OnigRegexpUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnigRegexpUtility.h; sourceTree = "<group>"; };
+		7807AC1D0E2FBB8600A5AB6A /* OnigRegexpUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnigRegexpUtility.m; sourceTree = "<group>"; };
+		7807AC1F0E2FBB8600A5AB6A /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		7807AC220E2FBB8600A5AB6A /* ascii.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ascii.c; sourceTree = "<group>"; };
+		7807AC230E2FBB8600A5AB6A /* unicode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unicode.c; sourceTree = "<group>"; };
+		7807AC240E2FBB8600A5AB6A /* utf16_be.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utf16_be.c; sourceTree = "<group>"; };
+		7807AC250E2FBB8600A5AB6A /* utf16_le.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utf16_le.c; sourceTree = "<group>"; };
+		7807AC260E2FBB8600A5AB6A /* utf32_be.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utf32_be.c; sourceTree = "<group>"; };
+		7807AC270E2FBB8600A5AB6A /* utf32_le.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utf32_le.c; sourceTree = "<group>"; };
+		7807AC280E2FBB8600A5AB6A /* oniguruma.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = oniguruma.h; sourceTree = "<group>"; };
+		7807AC290E2FBB8600A5AB6A /* regcomp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regcomp.c; sourceTree = "<group>"; };
+		7807AC2A0E2FBB8600A5AB6A /* regenc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regenc.c; sourceTree = "<group>"; };
+		7807AC2B0E2FBB8600A5AB6A /* regenc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = regenc.h; sourceTree = "<group>"; };
+		7807AC2C0E2FBB8600A5AB6A /* regerror.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regerror.c; sourceTree = "<group>"; };
+		7807AC2D0E2FBB8600A5AB6A /* regexec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regexec.c; sourceTree = "<group>"; };
+		7807AC2E0E2FBB8600A5AB6A /* regext.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regext.c; sourceTree = "<group>"; };
+		7807AC2F0E2FBB8600A5AB6A /* regint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = regint.h; sourceTree = "<group>"; };
+		7807AC300E2FBB8600A5AB6A /* regparse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regparse.c; sourceTree = "<group>"; };
+		7807AC310E2FBB8600A5AB6A /* regparse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = regparse.h; sourceTree = "<group>"; };
+		7807AC320E2FBB8600A5AB6A /* regsyntax.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regsyntax.c; sourceTree = "<group>"; };
+		7807AC330E2FBB8600A5AB6A /* regtrav.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regtrav.c; sourceTree = "<group>"; };
+		7807AC340E2FBB8600A5AB6A /* regversion.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regversion.c; sourceTree = "<group>"; };
+		7807AC350E2FBB8600A5AB6A /* st.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = st.c; sourceTree = "<group>"; };
+		7807AC360E2FBB8600A5AB6A /* st.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = st.h; sourceTree = "<group>"; };
+		78B1D1AA0E2FBEA100C857D5 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* CocoaOniguruma.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CocoaOniguruma.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D2F7E79907B2D74100F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,8 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */,
-				781979060E2DA9F5006354CE /* libonig.a in Frameworks */,
+				78B1D1AB0E2FBEA100C857D5 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,10 +125,7 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				781978FD0E2DA9D8006354CE /* OnigRegexp.h */,
-				781978FE0E2DA9D8006354CE /* OnigRegexp.m */,
-				781978FF0E2DA9D8006354CE /* OnigRegexpUtility.h */,
-				781979000E2DA9D8006354CE /* OnigRegexpUtility.m */,
+				7807AC190E2FBB8600A5AB6A /* core */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -107,8 +133,7 @@
 		1058C7B0FEA5585E11CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				781979050E2DA9F5006354CE /* libonig.a */,
-				1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */,
+				78B1D1AA0E2FBEA100C857D5 /* Cocoa.framework */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";
@@ -116,8 +141,6 @@
 		1058C7B2FEA5585E11CA2CBB /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0867D6A5FE840307C02AAC07 /* AppKit.framework */,
-				D2F7E79907B2D74100F64583 /* CoreData.framework */,
 				0867D69BFE84028FC02AAC07 /* Foundation.framework */,
 			);
 			name = "Other Frameworks";
@@ -131,6 +154,55 @@
 			name = "Other Sources";
 			sourceTree = "<group>";
 		};
+		7807AC190E2FBB8600A5AB6A /* core */ = {
+			isa = PBXGroup;
+			children = (
+				7807AC1A0E2FBB8600A5AB6A /* OnigRegexp.h */,
+				7807AC1B0E2FBB8600A5AB6A /* OnigRegexp.m */,
+				7807AC1C0E2FBB8600A5AB6A /* OnigRegexpUtility.h */,
+				7807AC1D0E2FBB8600A5AB6A /* OnigRegexpUtility.m */,
+				7807AC1E0E2FBB8600A5AB6A /* oniguruma */,
+			);
+			path = core;
+			sourceTree = "<group>";
+		};
+		7807AC1E0E2FBB8600A5AB6A /* oniguruma */ = {
+			isa = PBXGroup;
+			children = (
+				7807AC1F0E2FBB8600A5AB6A /* config.h */,
+				7807AC210E2FBB8600A5AB6A /* enc */,
+				7807AC280E2FBB8600A5AB6A /* oniguruma.h */,
+				7807AC290E2FBB8600A5AB6A /* regcomp.c */,
+				7807AC2A0E2FBB8600A5AB6A /* regenc.c */,
+				7807AC2B0E2FBB8600A5AB6A /* regenc.h */,
+				7807AC2C0E2FBB8600A5AB6A /* regerror.c */,
+				7807AC2D0E2FBB8600A5AB6A /* regexec.c */,
+				7807AC2E0E2FBB8600A5AB6A /* regext.c */,
+				7807AC2F0E2FBB8600A5AB6A /* regint.h */,
+				7807AC300E2FBB8600A5AB6A /* regparse.c */,
+				7807AC310E2FBB8600A5AB6A /* regparse.h */,
+				7807AC320E2FBB8600A5AB6A /* regsyntax.c */,
+				7807AC330E2FBB8600A5AB6A /* regtrav.c */,
+				7807AC340E2FBB8600A5AB6A /* regversion.c */,
+				7807AC350E2FBB8600A5AB6A /* st.c */,
+				7807AC360E2FBB8600A5AB6A /* st.h */,
+			);
+			path = oniguruma;
+			sourceTree = "<group>";
+		};
+		7807AC210E2FBB8600A5AB6A /* enc */ = {
+			isa = PBXGroup;
+			children = (
+				7807AC220E2FBB8600A5AB6A /* ascii.c */,
+				7807AC230E2FBB8600A5AB6A /* unicode.c */,
+				7807AC240E2FBB8600A5AB6A /* utf16_be.c */,
+				7807AC250E2FBB8600A5AB6A /* utf16_le.c */,
+				7807AC260E2FBB8600A5AB6A /* utf32_be.c */,
+				7807AC270E2FBB8600A5AB6A /* utf32_le.c */,
+			);
+			path = enc;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -138,29 +210,18 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				781979010E2DA9D8006354CE /* OnigRegexp.h in Headers */,
-				781979030E2DA9D8006354CE /* OnigRegexpUtility.h in Headers */,
+				7807AC380E2FBB8600A5AB6A /* OnigRegexp.h in Headers */,
+				7807AC3A0E2FBB8600A5AB6A /* OnigRegexpUtility.h in Headers */,
+				7807AC3C0E2FBB8600A5AB6A /* config.h in Headers */,
+				7807AC440E2FBB8600A5AB6A /* oniguruma.h in Headers */,
+				7807AC470E2FBB8600A5AB6A /* regenc.h in Headers */,
+				7807AC4B0E2FBB8600A5AB6A /* regint.h in Headers */,
+				7807AC4D0E2FBB8600A5AB6A /* regparse.h in Headers */,
+				7807AC520E2FBB8600A5AB6A /* st.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
-
-/* Begin PBXLegacyTarget section */
-		781979120E2DAB1B006354CE /* Oniguruma */ = {
-			isa = PBXLegacyTarget;
-			buildArgumentsString = "$(ACTION)";
-			buildConfigurationList = 7819791C0E2DAB24006354CE /* Build configuration list for PBXLegacyTarget "Oniguruma" */;
-			buildPhases = (
-			);
-			buildToolPath = /usr/bin/make;
-			buildWorkingDirectory = Source/oniguruma;
-			dependencies = (
-			);
-			name = Oniguruma;
-			passBuildSettingsInEnvironment = 1;
-			productName = Oniguruma;
-		};
-/* End PBXLegacyTarget section */
 
 /* Begin PBXNativeTarget section */
 		8DC2EF4F0486A6940098B216 /* CocoaOniguruma */ = {
@@ -175,7 +236,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				7819791E0E2DAB30006354CE /* PBXTargetDependency */,
 			);
 			name = CocoaOniguruma;
 			productInstallPath = "$(HOME)/Library/Frameworks";
@@ -189,7 +249,7 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 1DEB91B108733DA50010E9CD /* Build configuration list for PBXProject "CocoaOniguruma" */;
-			compatibilityVersion = "Xcode 3.1";
+			compatibilityVersion = "Xcode 3.0";
 			hasScannedForEncodings = 1;
 			mainGroup = 0867D691FE84028FC02AAC07 /* CocoaOniguruma */;
 			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
@@ -197,7 +257,6 @@
 			projectRoot = "";
 			targets = (
 				8DC2EF4F0486A6940098B216 /* CocoaOniguruma */,
-				781979120E2DAB1B006354CE /* Oniguruma */,
 			);
 		};
 /* End PBXProject section */
@@ -218,20 +277,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				781979020E2DA9D8006354CE /* OnigRegexp.m in Sources */,
-				781979040E2DA9D8006354CE /* OnigRegexpUtility.m in Sources */,
+				7807AC390E2FBB8600A5AB6A /* OnigRegexp.m in Sources */,
+				7807AC3B0E2FBB8600A5AB6A /* OnigRegexpUtility.m in Sources */,
+				7807AC3E0E2FBB8600A5AB6A /* ascii.c in Sources */,
+				7807AC3F0E2FBB8600A5AB6A /* unicode.c in Sources */,
+				7807AC400E2FBB8600A5AB6A /* utf16_be.c in Sources */,
+				7807AC410E2FBB8600A5AB6A /* utf16_le.c in Sources */,
+				7807AC420E2FBB8600A5AB6A /* utf32_be.c in Sources */,
+				7807AC430E2FBB8600A5AB6A /* utf32_le.c in Sources */,
+				7807AC450E2FBB8600A5AB6A /* regcomp.c in Sources */,
+				7807AC460E2FBB8600A5AB6A /* regenc.c in Sources */,
+				7807AC480E2FBB8600A5AB6A /* regerror.c in Sources */,
+				7807AC490E2FBB8600A5AB6A /* regexec.c in Sources */,
+				7807AC4A0E2FBB8600A5AB6A /* regext.c in Sources */,
+				7807AC4C0E2FBB8600A5AB6A /* regparse.c in Sources */,
+				7807AC4E0E2FBB8600A5AB6A /* regsyntax.c in Sources */,
+				7807AC4F0E2FBB8600A5AB6A /* regtrav.c in Sources */,
+				7807AC500E2FBB8600A5AB6A /* regversion.c in Sources */,
+				7807AC510E2FBB8600A5AB6A /* st.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		7819791E0E2DAB30006354CE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 781979120E2DAB1B006354CE /* Oniguruma */;
-			targetProxy = 7819791D0E2DAB30006354CE /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		089C1666FE841158C02AAC07 /* InfoPlist.strings */ = {
@@ -248,7 +315,6 @@
 		1DEB91AE08733DA50010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -261,19 +327,15 @@
 				GCC_PREFIX_HEADER = CocoaOniguruma_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/Source/oniguruma/universal\"",
-				);
 				PRODUCT_NAME = CocoaOniguruma;
 				WRAPPER_EXTENSION = framework;
+				ZERO_LINK = YES;
 			};
 			name = Debug;
 		};
 		1DEB91AF08733DA50010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -282,11 +344,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CocoaOniguruma_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/Source/oniguruma/universal\"",
-				);
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				PRODUCT_NAME = CocoaOniguruma;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -295,50 +353,26 @@
 		1DEB91B208733DA50010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
-				SDKROOT = macosx10.4;
-				VALID_ARCHS = "i386 ppc";
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
 			};
 			name = Debug;
 		};
 		1DEB91B308733DA50010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				GCC_C_LANGUAGE_STANDARD = c99;
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				DEPLOYMENT_LOCATION = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				INSTALL_PATH = "";
 				PREBINDING = NO;
-				SDKROOT = macosx10.4;
-				VALID_ARCHS = "i386 ppc";
-			};
-			name = Release;
-		};
-		781979130E2DAB1B006354CE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				PRODUCT_NAME = Oniguruma;
-			};
-			name = Debug;
-		};
-		781979140E2DAB1B006354CE /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				PRODUCT_NAME = Oniguruma;
-				ZERO_LINK = NO;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
 			};
 			name = Release;
 		};
@@ -359,15 +393,6 @@
 			buildConfigurations = (
 				1DEB91B208733DA50010E9CD /* Debug */,
 				1DEB91B308733DA50010E9CD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		7819791C0E2DAB24006354CE /* Build configuration list for PBXLegacyTarget "Oniguruma" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				781979130E2DAB1B006354CE /* Debug */,
-				781979140E2DAB1B006354CE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
