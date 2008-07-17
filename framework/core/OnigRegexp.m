@@ -64,12 +64,12 @@
 	const UChar* str = (const UChar*)[expression cStringUsingEncoding:STRING_ENCODING];
 
 	int status = onig_new(&entity,
-													str,
-													str + [expression length] * CHAR_SIZE,
-													option,
-													ONIG_ENCODING_UTF16_LE,
-													ONIG_SYNTAX_DEFAULT,
-													&err);
+							str,
+							str + [expression length] * CHAR_SIZE,
+							option,
+							ONIG_ENCODING,
+							ONIG_SYNTAX_DEFAULT,
+							&err);
 
 	if (status == ONIG_NORMAL) {
 		return [[[self alloc] initWithEntity:entity expression:expression] autorelease];
@@ -98,12 +98,12 @@
 	const UChar* str = (const UChar*)[target cStringUsingEncoding:STRING_ENCODING];
 	
 	int status = onig_search(_entity,
-														str,
-														str + [target length] * CHAR_SIZE,
-														str + start * CHAR_SIZE,
-														str + end * CHAR_SIZE,
-														region,
-														ONIG_OPTION_NONE);
+								str,
+								str + [target length] * CHAR_SIZE,
+								str + start * CHAR_SIZE,
+								str + end * CHAR_SIZE,
+								region,
+								ONIG_OPTION_NONE);
 
 	if (status != ONIG_MISMATCH) {
 		return [[[OnigResult alloc] initWithRegexp:self region:region target:target] autorelease];
@@ -131,11 +131,11 @@
 	const UChar* str = (const UChar*)[target cStringUsingEncoding:STRING_ENCODING];
 	
 	int status = onig_match(_entity,
-														str,
-														str + [target length] * CHAR_SIZE,
-														str + start * CHAR_SIZE,
-														region,
-														ONIG_OPTION_NONE);
+								str,
+								str + [target length] * CHAR_SIZE,
+								str + start * CHAR_SIZE,
+								region,
+								ONIG_OPTION_NONE);
 
 	if (status != ONIG_MISMATCH) {
 		return [[[OnigResult alloc] initWithRegexp:self region:region target:target] autorelease];
