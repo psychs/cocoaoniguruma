@@ -37,7 +37,7 @@ http://d.hatena.ne.jp/Psychs/ (in Japanese)
 
 * License
 
-CocoaOniguruma is derived from Oniguruma 5.9.1 currently.
+CocoaOniguruma contains a part of Oniguruma 5.9.1 source code currently.
 See also the Oniguruma's COPYING file.
 
 The revised BSD license
