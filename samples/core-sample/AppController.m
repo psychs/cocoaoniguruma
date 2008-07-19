@@ -32,9 +32,9 @@
     if (res) {
       [self log:@"matched"];
       
-      int size = [res size];
+      int count = [res count];
       int i;
-      for (i=0; i<size; i++) {
+      for (i=0; i<count; i++) {
         [self log:[NSString stringWithFormat:@"  result[%d]: %@ @ %d", i, [res stringAt:i], [res locationAt:i]]];
       }
       
@@ -62,11 +62,11 @@
     if (res) {
       [self log:@"matched"];
       
-      int size = [res size];
-      [self log:[NSString stringWithFormat:@"size: %d", size]];
+      int count = [res count];
+      [self log:[NSString stringWithFormat:@"count: %d", count]];
       
       int i;
-      for (i=0; i<size; i++) {
+      for (i=0; i<count; i++) {
         [self log:[NSString stringWithFormat:@"  res[%d]: %@ @ %d", i, [res stringAt:i], [res locationAt:i]]];
       }
       

@@ -184,6 +184,11 @@
 
 - (int)size
 {
+	return [self count];
+}
+
+- (int)count
+{
 	return _region->num_regs;
 }
 
@@ -195,8 +200,8 @@
 - (NSArray*)strings
 {
 	NSMutableArray* array;
-	int i, size;
-	for (i=0, size=[self size]; i<size; i++) {
+	int i, count;
+	for (i=0, count=[self count]; i<count; i++) {
 		[array addObject:[self stringAt:i]];
 	}
 	return array;
@@ -245,7 +250,7 @@
 
 - (NSIndexSet*)indexesForName:(NSString*)name
 {
-	int len = sizeof(int) * [self size];
+	int len = sizeof(int) * [self count];
 	int* buf = alloca(len);
 	memset(&buf, 0, len);
 	const UChar* str = (const UChar*)[name cStringUsingEncoding:STRING_ENCODING];

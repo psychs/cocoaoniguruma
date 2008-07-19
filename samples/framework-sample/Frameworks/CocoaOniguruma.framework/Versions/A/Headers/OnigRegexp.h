@@ -41,7 +41,7 @@
 
 - (NSString*)target;
 
-- (int)size;
+- (int)count;
 - (NSString*)stringAt:(int)index;
 - (NSArray*)strings;
 - (NSRange)rangeAt:(int)index;
