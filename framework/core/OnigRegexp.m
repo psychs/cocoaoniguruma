@@ -199,7 +199,7 @@
 
 - (NSArray*)strings
 {
-	NSMutableArray* array;
+	NSMutableArray* array = [NSMutableArray array];
 	int i, count;
 	for (i=0, count=[self count]; i<count; i++) {
 		[array addObject:[self stringAt:i]];
@@ -258,7 +258,7 @@
 	int num = onig_name_to_group_numbers([_expression entity], str, str + [name length] * CHAR_SIZE, &buf);
 	if (num < 0) return nil;
 	
-	NSMutableIndexSet* indexes = [[NSMutableIndexSet alloc] init];
+	NSMutableIndexSet* indexes = [NSMutableIndexSet indexSet];
 	int i;
 	for (i=0; i<num; i++) {
 		[indexes addIndex:*(buf+i)];
