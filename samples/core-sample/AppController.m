@@ -77,6 +77,19 @@
 			[self log:@"not matched"];
 		}
 	}
+	
+	{
+		[self log:@"replaceAllTest"];
+		
+		NSMutableString* m = [@"test" mutableCopy];
+		[m replaceAllByRegexp:@"^" with:@"Z"];
+		[self log:m];
+	}
+	{
+		NSMutableString* m = [@"test" mutableCopy];
+		[m replaceAllByRegexp:@"$" with:@"Z"];
+		[self log:m];
+	}
 }
 
 @end

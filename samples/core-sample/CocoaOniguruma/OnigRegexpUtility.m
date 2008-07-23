@@ -68,8 +68,11 @@
 	while (res = [expression search:self start:n]) {
 		NSRange range = [res bodyRange];
 		[self replaceCharactersInRange:range withString:string];
-		n = range.location + [string length];
+		int next = range.location + [string length];
+		if (n == next) next++;
+		n = next;
 		count++;
+		if ([self length] <= n) break;
 	}
 	return count;
 }
