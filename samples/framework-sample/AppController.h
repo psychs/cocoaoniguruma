@@ -2,6 +2,6 @@
 
 @interface AppController : NSObject
 {
-  IBOutlet id text;
+	IBOutlet id text;
 }
 @end
