@@ -22,9 +22,11 @@
 
 - (id)initWithEntity:(regex_t*)entity expression:(NSString*)expression
 {
-	[super init];
-	_entity = entity;
-	_expression = [expression copy];
+	self = [super init];
+	if (self) {
+		_entity = entity;
+		_expression = [expression copy];
+	}
 	return self;
 }
 
@@ -162,10 +164,12 @@
 
 - (id)initWithRegexp:(OnigRegexp*)expression region:(OnigRegion*)region target:(NSString*)target
 {
-	[super self];
-	_expression = [expression retain];
-	_region = region;
-	_target = [target copy];
+	self = [super init];
+	if (self) {
+		_expression = [expression retain];
+		_region = region;
+		_target = [target copy];
+	}
 	return self;
 }
 
