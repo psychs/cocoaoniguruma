@@ -11,19 +11,31 @@
 
 @interface NSString (OnigRegexpUtility)
 
-// expression is OnigRegexp or NSString
+// pattern is OnigRegexp or NSString
 
-- (NSRange)rangeOfRegexp:(id)expression;
-- (NSArray*)splitByRegexp:(id)expression;
+- (NSRange)rangeOfRegexp:(id)pattern;
+
+// based on ruby's split
+
+- (NSArray*)split;
+- (NSArray*)splitByRegexp:(id)pattern;
+- (NSArray*)splitByRegexp:(id)pattern limit:(int)limit;
+
+// based on ruby's gsub
+
+- (NSString*)replaceByRegexp:(id)pattern with:(NSString*)string;
+- (NSString*)replaceAllByRegexp:(id)pattern with:(NSString*)string;
 
 @end
 
 
 @interface NSMutableString (OnigRegexpUtility)
 
-// expression is OnigRegexp or NSString
+// pattern is OnigRegexp or NSString
 
-- (BOOL)replaceByRegexp:(id)expression with:(NSString*)string;
-- (int)replaceAllByRegexp:(id)expression with:(NSString*)string;
+// based on ruby's gsub
+
+- (NSMutableString*)replaceByRegexp:(id)pattern with:(NSString*)string;
+- (NSMutableString*)replaceAllByRegexp:(id)pattern with:(NSString*)string;
 
 @end

@@ -17,14 +17,16 @@ Follow the steps to use CocoaOniguruma in your project.
 
 * How to use as a Framework
 
-1. Build CocoaOniguruma.xcodeproj by Xcode.
-2. Copy "build/Release/CocoaOniguruma.framework" into your project directory.
-3. Open your project by Xcode.
-4. Add the framework to your project under "Frameworks".
-5. Open "Targets" in the project tree.
-6. Right click on the application target to open context menu and add a "New Copy Files Build Phase".
-7. Drag "CocoaOniguruma.framework" into the new "Copy Files" phase.
-8. Import the header file, so you can use CocoaOniguruma.
+ 1. Open CocoaOniguruma.xcodeproj by Xcode.
+ 2. Select "CocoaOniguruma" for Active Target and "Release" for Active Build Configuration.
+ 3. Build it.
+ 4. Copy "build/Release/CocoaOniguruma.framework" into your project directory.
+ 5. Open your project by Xcode.
+ 6. Add the framework to your project under "Frameworks".
+ 7. Open "Targets" in the project tree.
+ 8. Right click on the application target to open context menu and add a "New Copy Files Build Phase".
+ 9. Drag "CocoaOniguruma.framework" into the new "Copy Files" phase.
+10. Import the header file, so you can use CocoaOniguruma.
     #import "CocoaOniguruma/OnigRegexp.h"
 
 * The Author
@@ -32,6 +34,11 @@ Follow the steps to use CocoaOniguruma in your project.
 Satoshi Nakagawa <psychs AT limechat DOT net>
 http://d.hatena.ne.jp/Psychs/ (in Japanese)
 #limechat on irc.freenode.net
+
+* Thanks
+
+The specifications and implementations of split and replace functions are based on ruby 1.8.
+Thanks to Matz.
 
 * License
 
