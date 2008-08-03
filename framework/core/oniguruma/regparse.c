@@ -728,7 +728,10 @@ name_add(regex_t* reg, UChar* name, UChar* name_end, int backref, ScanEnv* env)
     CHECK_NULL_RETURN_MEMERR(e);
 
     e->name = strdup_with_null(reg->enc, name, name_end);
-    if (IS_NULL(e->name)) return ONIGERR_MEMORY;
+    if (IS_NULL(e->name)) {
+      xfree(e);
+      return ONIGERR_MEMORY;
+    }
     onig_st_insert_strend(t, e->name, (e->name + (name_end - name)),
                           (HashDataType )e);
 
@@ -5387,6 +5390,9 @@ parse_exp(Node** np, OnigToken* tok, int term,
 
       if (r == 0) {
 	*targetp = qn;
+      }
+      else if (r == 1) {
+	onig_node_free(qn);
       }
       else if (r == 2) { /* split case: /abc+/ */
 	Node *tmp;
