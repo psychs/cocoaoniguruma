@@ -32,7 +32,7 @@ Follow the steps to use CocoaOniguruma in your project.
 * The Author
 
 Satoshi Nakagawa <psychs AT limechat DOT net>
-http://d.hatena.ne.jp/Psychs/ (in Japanese)
+http://limechat.net/psychs/
 #limechat on irc.freenode.net
 
 * Thanks
