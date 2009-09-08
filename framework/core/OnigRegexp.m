@@ -75,7 +75,8 @@
 
 	if (status == ONIG_NORMAL) {
 		return [[[self alloc] initWithEntity:entity expression:expression] autorelease];
-	} else {
+	}
+	else {
 		if (entity) onig_free(entity);
 		return nil;
 	}
@@ -109,7 +110,8 @@
 
 	if (status != ONIG_MISMATCH) {
 		return [[[OnigResult alloc] initWithRegexp:self region:region target:target] autorelease];
-	} else {
+	}
+	else {
 		onig_region_free(region, 1);
 		return nil;
 	}
@@ -141,7 +143,8 @@
 
 	if (status != ONIG_MISMATCH) {
 		return [[[OnigResult alloc] initWithRegexp:self region:region target:target] autorelease];
-	} else {
+	}
+	else {
 		onig_region_free(region, 1);
 		return nil;
 	}

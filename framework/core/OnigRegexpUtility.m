@@ -58,7 +58,8 @@
 				target = [target substringToIndex:r.location];
 			}
 			pattern = [OnigRegexp compile:@"\\s+"];
-		} else {
+		}
+		else {
 			pattern = [OnigRegexp compile:(NSString*)pattern];
 		}
 	}
@@ -70,7 +71,8 @@
 		limit = [limitNum intValue];
 		if (limit <=0) {
 			limitNum = nil;
-		} else if (limit == 1) {
+		}
+		else if (limit == 1) {
 			if ([target length] == 0) return [NSArray array];
 			return [NSArray arrayWithObjects:[[target copy] autorelease], nil];
 		}
@@ -92,15 +94,18 @@
 			if ([target length] == 0) {
 				[array addObject:@""];
 				break;
-			} else if (lastNull) {
+			}
+			else if (lastNull) {
 				[array addObject:[target substringWithRange:NSMakeRange(begin, 1)]];
 				begin = start;
-			} else {
+			}
+			else {
 				start++;
 				lastNull = YES;
 				continue;
 			}
-		} else {
+		}
+		else {
 			[array addObject:[target substringWithRange:NSMakeRange(begin, end-begin)]];
 			begin = start = right;
 		}
@@ -112,7 +117,8 @@
 	if ([target length] > 0 && (limitNum || [target length] > begin || limit < 0)) {
 		if ([target length] == begin) {
 			[array addObject:@""];
-		} else {
+		}
+		else {
 			[array addObject:[target substringFromIndex:begin]];
 		}
 	}
@@ -138,7 +144,8 @@
 		NSMutableString* s = [[self mutableCopy] autorelease];
 		[s replaceCharactersInRange:[res bodyRange] withString:string];
 		return s;
-	} else {
+	}
+	else {
 		return [[self mutableCopy] autorelease];
 	}
 }
