@@ -285,7 +285,7 @@
 	if (!indexes) return nil;
 	
 	NSMutableArray* array = [NSMutableArray array];
-	int i;
+	NSUInteger i;
 	for (i=[indexes firstIndex]; i!=NSNotFound; i=[indexes indexGreaterThanIndex:i]) {
 		[array addObject:[self stringAt:i]];
 	}
