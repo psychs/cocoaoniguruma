@@ -8,6 +8,7 @@
 - (NSArray*)__split:(id)pattern limit:(NSNumber*)limit;
 @end
 
+
 @implementation NSString (OnigRegexpNSStringUtility)
 
 - (NSRange)rangeOfRegexp:(id)pattern

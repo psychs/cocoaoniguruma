@@ -1,11 +1,11 @@
 #import <Foundation/Foundation.h>
 #import <CocoaOniguruma/OnigRegexp.h>
 
+
 int main()
 {
 	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 	
-/*
 	NSLog(@"%@", [@" now's  the time" split]);
 	NSLog(@"%@", [@" now's  the time" splitByRegexp:@" "]);
 	NSLog(@"%@", [@" now's  the time" splitByRegexp:[OnigRegexp compile:@" "]]);
@@ -30,7 +30,6 @@ int main()
 	NSLog(@"%@", [@"abc" splitByRegexp:@"." limit:-1]);
 	NSLog(@"%@", [@"abc" splitByRegexp:@""]);
 	NSLog(@"%@", [@"abc" splitByRegexp:@"" limit:-1]);
-*/
 	
 	[pool release];
 	return 0;
