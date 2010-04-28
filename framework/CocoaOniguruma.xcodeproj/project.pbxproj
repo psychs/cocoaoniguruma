@@ -199,8 +199,8 @@
 		7807AC1E0E2FBB8600A5AB6A /* oniguruma */ = {
 			isa = PBXGroup;
 			children = (
-				7807AC1F0E2FBB8600A5AB6A /* config.h */,
 				7807AC210E2FBB8600A5AB6A /* enc */,
+				7807AC1F0E2FBB8600A5AB6A /* config.h */,
 				7807AC280E2FBB8600A5AB6A /* oniguruma.h */,
 				7807AC290E2FBB8600A5AB6A /* regcomp.c */,
 				7807AC2A0E2FBB8600A5AB6A /* regenc.c */,

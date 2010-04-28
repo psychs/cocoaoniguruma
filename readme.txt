@@ -37,12 +37,12 @@ http://limechat.net/psychs/
 
 * Thanks
 
-The specifications and implementations of split and replace functions are based on ruby 1.8.
+The specifications and implementations of split and replace functions are based on ruby.
 Thanks to Matz.
 
 * License
 
-CocoaOniguruma contains a part of Oniguruma 5.9.1 source code currently.
+CocoaOniguruma contains a part of Oniguruma 5.9.2 source code currently.
 See also the Oniguruma's COPYING file.
 
 The new BSD license
