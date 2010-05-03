@@ -45,7 +45,7 @@ Thanks to Matz.
 CocoaOniguruma contains a part of Oniguruma 5.9.2 source code currently.
 See also the Oniguruma's COPYING file.
 
-The new BSD license
+The New BSD License
 
 Copyright (c) 2008-2010  Satoshi Nakagawa  <psychs AT limechat DOT net>
 All rights reserved.
