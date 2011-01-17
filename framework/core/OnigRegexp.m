@@ -55,12 +55,18 @@
 
 + (OnigRegexp*)compile:(NSString*)expression ignorecase:(BOOL)ignorecase multiline:(BOOL)multiline extended:(BOOL)extended
 {
+    OnigOption options = OnigOptionNone;
+    options |= multiline ? OnigOptionMultiline : OnigOptionSingleline;
+    if(ignorecase) options |= OnigOptionIgnorecase;
+    if(extended) options |= OnigOptionExtend;
+    return [self compile:expression withOptions:options];
+}
+
++ (OnigRegexp*)compile:(NSString*)expression withOptions:(OnigOption)aOptions
+{
 	if (!expression) return nil;
 	
-	OnigOptionType option = ONIG_OPTION_NONE;
-	option |= multiline ? ONIG_OPTION_MULTILINE : ONIG_OPTION_SINGLELINE;
-	if (ignorecase) option |= ONIG_OPTION_IGNORECASE;
-	if (extended) option |= ONIG_OPTION_EXTEND;
+	OnigOptionType option = aOptions;
 	
 	OnigErrorInfo err;
 	regex_t* entity = 0;
