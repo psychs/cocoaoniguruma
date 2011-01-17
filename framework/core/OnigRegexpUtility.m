@@ -3,9 +3,31 @@
 
 #import "OnigRegexpUtility.h"
 
+typedef NSString* (*ReplaceCallback)(OnigResult*, void*, SEL);
+
+NSString* stringReplaceCallback(OnigResult* res, void* str, SEL sel)
+{
+    return (NSString*)str;
+} 
+
+NSString* selectorReplaceCallback(OnigResult* res, void* str, SEL sel)
+{
+    id object = str;
+    return [object performSelector:sel withObject:res];
+} 
+
+#if defined(NS_BLOCKS_AVAILABLE)
+NSString* blockReplaceCallback(OnigResult* res, void* str, SEL sel)
+{
+    NSString* (^block)(OnigResult*) = (NSString* (^)(OnigResult*))str;
+    return block(res);
+} 
+#endif
 
 @interface NSString (OnigRegexpNSStringUtilityPrivate)
 - (NSArray*)__split:(id)pattern limit:(NSNumber*)limit;
+- (NSString*)__replaceByRegexp:(id)pattern withCallback:(ReplaceCallback)cp data:(void*)data selector:(SEL)sel;
+- (NSString*)__replaceAllByRegexp:(id)pattern withCallback:(ReplaceCallback)cp data:(void*)data selector:(SEL)sel;
 @end
 
 
@@ -134,7 +156,7 @@
 	return array;
 }
 
-- (NSString*)replaceByRegexp:(id)pattern with:(NSString*)string
+- (NSString*)__replaceByRegexp:(id)pattern withCallback:(ReplaceCallback)cp data:(void*)data selector:(SEL)sel
 {
 	if (![pattern isKindOfClass:[OnigRegexp class]]) {
 		pattern = [OnigRegexp compile:(NSString*)pattern];
@@ -143,7 +165,7 @@
 	OnigResult* res = [pattern search:self];
 	if (res) {
 		NSMutableString* s = [[self mutableCopy] autorelease];
-		[s replaceCharactersInRange:[res bodyRange] withString:string];
+		[s replaceCharactersInRange:[res bodyRange] withString:cp(res, data, sel)];
 		return s;
 	}
 	else {
@@ -151,11 +173,28 @@
 	}
 }
 
+- (NSString*)replaceByRegexp:(id)pattern with:(NSString*)string
+{
+    return [self __replaceByRegexp:pattern withCallback:stringReplaceCallback data:string selector:Nil];
+}
+
+- (NSString*)replaceByRegexp:(id)pattern withCallback:(id)object selector:(SEL)sel
+{
+    return [self __replaceByRegexp:pattern withCallback:selectorReplaceCallback data:object selector:sel];
+}
+
+#if defined(NS_BLOCKS_AVAILABLE)
+- (NSString*)replaceByRegexp:(id)pattern withBlock:(NSString* (^)(OnigResult*))block
+{
+    return [self __replaceByRegexp:pattern withCallback:blockReplaceCallback data:block selector:Nil];
+}
+#endif
+
 // 
 // This implementation is based on ruby 1.8.
 // 
 
-- (NSString*)replaceAllByRegexp:(id)pattern with:(NSString*)string
+- (NSString*)__replaceAllByRegexp:(id)pattern withCallback:(ReplaceCallback)cp data:(void*)data selector:(SEL)sel
 {
 	if (![pattern isKindOfClass:[OnigRegexp class]]) {
 		pattern = [OnigRegexp compile:(NSString*)pattern];
@@ -173,7 +212,7 @@
 		NSRange range = [res bodyRange];
 		int len = range.location-offset;
 		if (len > 0) [s appendString:[self substringWithRange:NSMakeRange(offset, len)]];
-		[s appendString:string];
+		[s appendString:cp(res, data, sel)];
 		
 		offset = NSMaxRange(range);
 		if (range.length == 0) {
@@ -193,6 +232,23 @@
 	return s;
 }
 
+- (NSString*)replaceAllByRegexp:(id)pattern with:(NSString*)string
+{
+    return [self __replaceAllByRegexp:pattern withCallback:stringReplaceCallback data:string selector:Nil];
+}
+
+- (NSString*)replaceAllByRegexp:(id)pattern withCallback:(id)object selector:(SEL)sel
+{
+    return [self __replaceAllByRegexp:pattern withCallback:selectorReplaceCallback data:object selector:sel];
+}
+
+#if defined(NS_BLOCKS_AVAILABLE)
+- (NSString*)replaceAllByRegexp:(id)pattern withBlock:(NSString* (^)(OnigResult*))block
+{
+    return [self __replaceAllByRegexp:pattern withCallback:blockReplaceCallback data:block selector:Nil];
+}
+#endif
+
 @end
 
 
@@ -207,5 +263,27 @@
 {
 	return (NSMutableString*)[super replaceAllByRegexp:pattern with:string];
 }
+
+- (NSMutableString*)replaceByRegexp:(id)pattern withCallback:(id)object selector:(SEL)sel
+{
+	return (NSMutableString*)[super replaceByRegexp:pattern withCallback:object selector:sel];
+}
+
+- (NSMutableString*)replaceAllByRegexp:(id)pattern withCallback:(id)object selector:(SEL)sel
+{
+    return (NSMutableString*)[super replaceAllByRegexp:pattern withCallback:object selector:sel];
+}
+
+#if defined(NS_BLOCKS_AVAILABLE)
+- (NSMutableString*)replaceByRegexp:(id)pattern withBlock:(NSString* (^)(OnigResult*))block
+{
+    return (NSMutableString*)[super replaceByRegexp:pattern withBlock:block];
+}
+
+- (NSMutableString*)replaceAllByRegexp:(id)pattern withBlock:(NSString* (^)(OnigResult*))block
+{
+    return (NSMutableString*)[super replaceAllByRegexp:pattern withBlock:block];
+}
+#endif
 
 @end
