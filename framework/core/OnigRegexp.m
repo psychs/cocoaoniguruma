@@ -264,9 +264,7 @@
 
 - (NSIndexSet*)indexesForName:(NSString*)name
 {
-	int len = sizeof(int) * [self count];
-	int* buf = alloca(len);
-	memset(&buf, 0, len);
+	int* buf = NULL;
 	const UChar* str = (const UChar*)[name cStringUsingEncoding:STRING_ENCODING];
 	
 	int num = onig_name_to_group_numbers([_expression entity], str, str + [name length] * CHAR_SIZE, &buf);
