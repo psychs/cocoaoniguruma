@@ -59,14 +59,14 @@
     options |= multiline ? OnigOptionMultiline : OnigOptionSingleline;
     if(ignorecase) options |= OnigOptionIgnorecase;
     if(extended) options |= OnigOptionExtend;
-    return [self compile:expression withOptions:options];
+    return [self compile:expression options:options];
 }
 
-+ (OnigRegexp*)compile:(NSString*)expression withOptions:(OnigOption)aOptions
++ (OnigRegexp*)compile:(NSString*)expression options:(OnigOption)theOptions
 {
 	if (!expression) return nil;
 	
-	OnigOptionType option = aOptions;
+	OnigOptionType option = theOptions;
 	
 	OnigErrorInfo err;
 	regex_t* entity = 0;
