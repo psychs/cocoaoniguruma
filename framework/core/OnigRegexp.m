@@ -273,7 +273,7 @@
 	NSMutableIndexSet* indexes = [NSMutableIndexSet indexSet];
 	int i;
 	for (i=0; i<num; i++) {
-		[indexes addIndex:*(buf+i)];
+		[indexes addIndex:buf[i]];
 	}
 	return indexes;
 }
