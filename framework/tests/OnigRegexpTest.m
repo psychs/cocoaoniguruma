@@ -100,6 +100,25 @@
 	STAssertEqualObjects([@"1,2,,3,4,," splitByRegexp:@"," limit:-4], expected, nil);
 }
 
+- (NSString *)succReplace:(OnigResult *)res
+{
+    unichar ch[2];
+    ch[0] = [[res body] characterAtIndex:0] + 1;
+    ch[1] = ' ';
+    return [NSString stringWithCharacters:ch length:2];
+}
+
+- (NSString *)describeReplace:(OnigResult *)res
+{
+    NSString* body = [res body];
+    return [NSString stringWithFormat:@"%@[%@]", [body class], body];
+}
+
+- (NSString *)xReplace:(OnigResult *)res
+{
+    return @"x";
+}
+
 - (void)testReplace
 {
 	STAssertEqualObjects([@"" replaceByRegexp:@"" with:@""], @"", nil);
@@ -108,6 +127,29 @@
 	STAssertEqualObjects([@"abc" replaceByRegexp:@"" with:@"_"], @"_abc", nil);
 	STAssertEqualObjects([@"abc" replaceByRegexp:@"$" with:@"_"], @"abc_", nil);
 	STAssertEqualObjects([@"aa 00 aa 11" replaceByRegexp:@"\\d+" with:@"digits"], @"aa digits aa 11", nil);
+
+	STAssertEqualObjects([@"hello" replaceByRegexp:@"." withCallback:self selector:@selector(succReplace:)], @"i ello", nil);
+	STAssertEqualObjects([@"hello!" replaceByRegexp:@"(.)(.)" withCallback:self selector:@selector(describeReplace:)], @"NSCFString[he]llo!", nil);
+	STAssertEqualObjects([@"hello" replaceByRegexp:@"l" withCallback:self selector:@selector(xReplace:)], @"hexlo", nil);
+
+#if defined(NS_BLOCKS_AVAILABLE)
+	STAssertEqualObjects([@"hello" replaceByRegexp:@"." withBlock:^(OnigResult* res) {
+        unichar ch[2];
+        ch[0] = [[res body] characterAtIndex:0] + 1;
+        ch[1] = ' ';
+        return (NSString *)[NSString stringWithCharacters:ch length:2];
+    }], @"i ello", nil);
+    
+    NSString* actual = [@"hello!" replaceByRegexp:@"(.)(.)" withBlock:^(OnigResult* res) {
+        NSString* body = [res body];
+        return (NSString *)[NSString stringWithFormat:@"%@[%@]", [body class], body];
+    }];
+	STAssertEqualObjects(actual, @"NSCFString[he]llo!", nil);
+    
+	STAssertEqualObjects([@"hello" replaceByRegexp:@"l" withBlock:^(OnigResult* res) {
+        return @"x";
+    }], @"hexlo", nil);
+#endif
 }
 
 - (void)testReplaceAll
@@ -117,6 +159,29 @@
 	STAssertEqualObjects([@"abc" replaceAllByRegexp:@"$" with:@"_"], @"abc_", nil);
 	STAssertEqualObjects([@"abc" replaceAllByRegexp:@"." with:@"_"], @"___", nil);
 	STAssertEqualObjects([@"aa 00 aa 11" replaceAllByRegexp:@"\\d+" with:@"digits"], @"aa digits aa digits", nil);
+
+	STAssertEqualObjects([@"hello" replaceAllByRegexp:@"." withCallback:self selector:@selector(succReplace:)], @"i f m m p ", nil);
+	STAssertEqualObjects([@"hello!" replaceAllByRegexp:@"(.)(.)" withCallback:self selector:@selector(describeReplace:)], @"NSCFString[he]NSCFString[ll]NSCFString[o!]", nil);
+	STAssertEqualObjects([@"hello" replaceAllByRegexp:@"l" withCallback:self selector:@selector(xReplace:)], @"hexxo", nil);
+
+#if defined(NS_BLOCKS_AVAILABLE)
+	STAssertEqualObjects([@"hello" replaceAllByRegexp:@"." withBlock:^(OnigResult* res) {
+        unichar ch[2];
+        ch[0] = [[res body] characterAtIndex:0] + 1;
+        ch[1] = ' ';
+        return (NSString *)[NSString stringWithCharacters:ch length:2];
+    }], @"i f m m p ", nil);
+    
+    NSString* actual = [@"hello!" replaceAllByRegexp:@"(.)(.)" withBlock:^(OnigResult* res) {
+        NSString* body = [res body];
+        return (NSString *)[NSString stringWithFormat:@"%@[%@]", [body class], body];
+    }];
+	STAssertEqualObjects(actual, @"NSCFString[he]NSCFString[ll]NSCFString[o!]", nil);
+    
+	STAssertEqualObjects([@"hello" replaceAllByRegexp:@"l" withBlock:^(OnigResult* res) {
+        return @"x";
+    }], @"hexxo", nil);
+#endif
 }
 
 @end
