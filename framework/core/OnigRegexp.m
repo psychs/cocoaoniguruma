@@ -41,6 +41,11 @@
 	[super dealloc];
 }
 
+- (void)finalize {
+    if (_entity) onig_free(_entity);
+    [super finalize];
+}
+
 + (OnigRegexp*)compile:(NSString*)expression
 {
 	return [self compile:expression ignorecase:NO multiline:NO extended:NO];
@@ -193,6 +198,12 @@
 	if (_region) onig_region_free(_region, 1);
 	[_target release];
 	[super dealloc];
+}
+
+- (void)finalize
+{
+    if (_region) onig_region_free(_region, 1);
+    [super finalize];
 }
 
 - (NSString*)target
