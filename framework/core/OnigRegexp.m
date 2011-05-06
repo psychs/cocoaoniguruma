@@ -16,6 +16,9 @@
 
 @interface OnigResult (Private)
 - (id)initWithRegexp:(OnigRegexp*)expression region:(OnigRegion*)region target:(NSString*)target;
+
+- (NSMutableArray*) captureNameArray;
+
 @end
 
 
@@ -179,6 +182,7 @@
 		_expression = [expression retain];
 		_region = region;
 		_target = [target copy];
+        _captureNames = [NSMutableArray array];
 	}
 	return self;
 }
@@ -254,6 +258,24 @@
 - (NSString*)postMatch
 {
 	return [_target substringFromIndex:[self locationAt:0] + [self lengthAt:0]];
+}
+
+- (NSMutableArray*) captureNameArray {
+    return self->_captureNames;
+}
+
+
+// Used to get list of names
+int co_name_callback(const OnigUChar *name, const OnigUChar *end, int ngroups, int *group_list, OnigRegex re, void *arg) {
+    OnigResult *result = (OnigResult *)arg;
+    
+    [[result captureNameArray] addObject:[NSString stringWithUTF8String:(const char*)name]];
+    return 0;
+}
+
+- (NSArray*) captureNames {
+    onig_foreach_name([self->_expression entity],co_name_callback,self);
+    return [NSArray arrayWithArray:self->_captureNames];
 }
 
 - (int)indexForName:(NSString*)name
