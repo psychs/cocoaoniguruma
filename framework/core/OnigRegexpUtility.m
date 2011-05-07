@@ -7,20 +7,20 @@ typedef NSString* (*ReplaceCallback)(OnigResult*, void*, SEL);
 
 NSString* stringReplaceCallback(OnigResult* res, void* str, SEL sel)
 {
-    return (NSString*)str;
+	return (NSString*)str;
 } 
 
 NSString* selectorReplaceCallback(OnigResult* res, void* str, SEL sel)
 {
-    id object = str;
-    return [object performSelector:sel withObject:res];
+	id object = str;
+	return [object performSelector:sel withObject:res];
 } 
 
 #if defined(NS_BLOCKS_AVAILABLE)
 NSString* blockReplaceCallback(OnigResult* res, void* str, SEL sel)
 {
-    NSString* (^block)(OnigResult*) = (NSString* (^)(OnigResult*))str;
-    return block(res);
+	NSString* (^block)(OnigResult*) = (NSString* (^)(OnigResult*))str;
+	return block(res);
 } 
 #endif
 
@@ -71,7 +71,7 @@ NSString* blockReplaceCallback(OnigResult* res, void* str, SEL sel)
 			// If the pattern is a single space,
 			// split by contiguous white spaces,
 			// where leading and trailing white spaces are ignored.
-
+			
 			NSRange r = [target rangeOfRegexp:@"^\\s+"];
 			if (r.location != NSNotFound) {
 				target = [target substringFromIndex:NSMaxRange(r)];
@@ -175,18 +175,18 @@ NSString* blockReplaceCallback(OnigResult* res, void* str, SEL sel)
 
 - (NSString*)replaceByRegexp:(id)pattern with:(NSString*)string
 {
-    return [self __replaceByRegexp:pattern withCallback:stringReplaceCallback data:string selector:Nil];
+	return [self __replaceByRegexp:pattern withCallback:stringReplaceCallback data:string selector:Nil];
 }
 
 - (NSString*)replaceByRegexp:(id)pattern withCallback:(id)object selector:(SEL)sel
 {
-    return [self __replaceByRegexp:pattern withCallback:selectorReplaceCallback data:object selector:sel];
+	return [self __replaceByRegexp:pattern withCallback:selectorReplaceCallback data:object selector:sel];
 }
 
 #if defined(NS_BLOCKS_AVAILABLE)
 - (NSString*)replaceByRegexp:(id)pattern withBlock:(NSString* (^)(OnigResult*))block
 {
-    return [self __replaceByRegexp:pattern withCallback:blockReplaceCallback data:block selector:Nil];
+	return [self __replaceByRegexp:pattern withCallback:blockReplaceCallback data:block selector:Nil];
 }
 #endif
 
@@ -199,7 +199,7 @@ NSString* blockReplaceCallback(OnigResult* res, void* str, SEL sel)
 	if (![pattern isKindOfClass:[OnigRegexp class]]) {
 		pattern = [OnigRegexp compile:(NSString*)pattern];
 	}
-		
+	
 	OnigResult* res = [pattern search:self];
 	if (!res) {
 		return [[self mutableCopy] autorelease];
@@ -234,18 +234,18 @@ NSString* blockReplaceCallback(OnigResult* res, void* str, SEL sel)
 
 - (NSString*)replaceAllByRegexp:(id)pattern with:(NSString*)string
 {
-    return [self __replaceAllByRegexp:pattern withCallback:stringReplaceCallback data:string selector:Nil];
+	return [self __replaceAllByRegexp:pattern withCallback:stringReplaceCallback data:string selector:Nil];
 }
 
 - (NSString*)replaceAllByRegexp:(id)pattern withCallback:(id)object selector:(SEL)sel
 {
-    return [self __replaceAllByRegexp:pattern withCallback:selectorReplaceCallback data:object selector:sel];
+	return [self __replaceAllByRegexp:pattern withCallback:selectorReplaceCallback data:object selector:sel];
 }
 
 #if defined(NS_BLOCKS_AVAILABLE)
 - (NSString*)replaceAllByRegexp:(id)pattern withBlock:(NSString* (^)(OnigResult*))block
 {
-    return [self __replaceAllByRegexp:pattern withCallback:blockReplaceCallback data:block selector:Nil];
+	return [self __replaceAllByRegexp:pattern withCallback:blockReplaceCallback data:block selector:Nil];
 }
 #endif
 
@@ -271,18 +271,18 @@ NSString* blockReplaceCallback(OnigResult* res, void* str, SEL sel)
 
 - (NSMutableString*)replaceAllByRegexp:(id)pattern withCallback:(id)object selector:(SEL)sel
 {
-    return (NSMutableString*)[super replaceAllByRegexp:pattern withCallback:object selector:sel];
+	return (NSMutableString*)[super replaceAllByRegexp:pattern withCallback:object selector:sel];
 }
 
 #if defined(NS_BLOCKS_AVAILABLE)
 - (NSMutableString*)replaceByRegexp:(id)pattern withBlock:(NSString* (^)(OnigResult*))block
 {
-    return (NSMutableString*)[super replaceByRegexp:pattern withBlock:block];
+	return (NSMutableString*)[super replaceByRegexp:pattern withBlock:block];
 }
 
 - (NSMutableString*)replaceAllByRegexp:(id)pattern withBlock:(NSString* (^)(OnigResult*))block
 {
-    return (NSMutableString*)[super replaceAllByRegexp:pattern withBlock:block];
+	return (NSMutableString*)[super replaceAllByRegexp:pattern withBlock:block];
 }
 #endif
 

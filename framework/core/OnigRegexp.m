@@ -41,9 +41,10 @@
 	[super dealloc];
 }
 
-- (void)finalize {
-    if (_entity) onig_free(_entity);
-    [super finalize];
+- (void)finalize
+{
+	if (_entity) onig_free(_entity);
+	[super finalize];
 }
 
 + (OnigRegexp*)compile:(NSString*)expression
@@ -63,11 +64,11 @@
 
 + (OnigRegexp*)compile:(NSString*)expression ignorecase:(BOOL)ignorecase multiline:(BOOL)multiline extended:(BOOL)extended
 {
-    OnigOption options = OnigOptionNone;
-    options |= multiline ? OnigOptionMultiline : OnigOptionSingleline;
-    if(ignorecase) options |= OnigOptionIgnorecase;
-    if(extended) options |= OnigOptionExtend;
-    return [self compile:expression options:options];
+	OnigOption options = OnigOptionNone;
+	options |= multiline ? OnigOptionMultiline : OnigOptionSingleline;
+	if(ignorecase) options |= OnigOptionIgnorecase;
+	if(extended) options |= OnigOptionExtend;
+	return [self compile:expression options:options];
 }
 
 + (OnigRegexp*)compile:(NSString*)expression options:(OnigOption)theOptions
@@ -79,15 +80,15 @@
 	OnigErrorInfo err;
 	regex_t* entity = 0;
 	const UChar* str = (const UChar*)[expression cStringUsingEncoding:STRING_ENCODING];
-
+	
 	int status = onig_new(&entity,
-							str,
-							str + [expression length] * CHAR_SIZE,
-							option,
-							ONIG_ENCODING,
-							ONIG_SYNTAX_DEFAULT,
-							&err);
-
+						  str,
+						  str + [expression length] * CHAR_SIZE,
+						  option,
+						  ONIG_ENCODING,
+						  ONIG_SYNTAX_DEFAULT,
+						  &err);
+	
 	if (status == ONIG_NORMAL) {
 		return [[[self alloc] initWithEntity:entity expression:expression] autorelease];
 	}
@@ -116,13 +117,13 @@
 	const UChar* str = (const UChar*)[target cStringUsingEncoding:STRING_ENCODING];
 	
 	int status = onig_search(_entity,
-								str,
-								str + [target length] * CHAR_SIZE,
-								str + start * CHAR_SIZE,
-								str + end * CHAR_SIZE,
-								region,
-								ONIG_OPTION_NONE);
-
+							 str,
+							 str + [target length] * CHAR_SIZE,
+							 str + start * CHAR_SIZE,
+							 str + end * CHAR_SIZE,
+							 region,
+							 ONIG_OPTION_NONE);
+	
 	if (status != ONIG_MISMATCH) {
 		return [[[OnigResult alloc] initWithRegexp:self region:region target:target] autorelease];
 	}
@@ -145,17 +146,17 @@
 - (OnigResult*)match:(NSString*)target start:(int)start
 {
 	if (!target) return nil;
-
+	
 	OnigRegion* region = onig_region_new();
 	const UChar* str = (const UChar*)[target cStringUsingEncoding:STRING_ENCODING];
 	
 	int status = onig_match(_entity,
-								str,
-								str + [target length] * CHAR_SIZE,
-								str + start * CHAR_SIZE,
-								region,
-								ONIG_OPTION_NONE);
-
+							str,
+							str + [target length] * CHAR_SIZE,
+							str + start * CHAR_SIZE,
+							region,
+							ONIG_OPTION_NONE);
+	
 	if (status != ONIG_MISMATCH) {
 		return [[[OnigResult alloc] initWithRegexp:self region:region target:target] autorelease];
 	}
@@ -187,7 +188,7 @@
 		_expression = [expression retain];
 		_region = region;
 		_target = [target copy];
-        _captureNames = [NSMutableArray array];
+		_captureNames = [NSMutableArray array];
 	}
 	return self;
 }
@@ -202,8 +203,8 @@
 
 - (void)finalize
 {
-    if (_region) onig_region_free(_region, 1);
-    [super finalize];
+	if (_region) onig_region_free(_region, 1);
+	[super finalize];
 }
 
 - (NSString*)target
@@ -272,21 +273,21 @@
 }
 
 - (NSMutableArray*) captureNameArray {
-    return self->_captureNames;
+	return self->_captureNames;
 }
-
 
 // Used to get list of names
-int co_name_callback(const OnigUChar *name, const OnigUChar *end, int ngroups, int *group_list, OnigRegex re, void *arg) {
-    OnigResult *result = (OnigResult *)arg;
-    
-    [[result captureNameArray] addObject:[NSString stringWithUTF8String:(const char*)name]];
-    return 0;
+int co_name_callback(const OnigUChar* name, const OnigUChar* end, int ngroups, int* group_list, OnigRegex re, void* arg) {
+	OnigResult *result = (OnigResult *)arg;
+	
+	[[result captureNameArray] addObject:[NSString stringWithUTF8String:(const char*)name]];
+	return 0;
 }
 
-- (NSArray*) captureNames {
-    onig_foreach_name([self->_expression entity],co_name_callback,self);
-    return [NSArray arrayWithArray:self->_captureNames];
+- (NSArray*)captureNames
+{
+	onig_foreach_name([self->_expression entity], co_name_callback, self);
+	return [NSArray arrayWithArray:self->_captureNames];
 }
 
 - (int)indexForName:(NSString*)name
