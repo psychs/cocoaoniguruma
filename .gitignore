@@ -18,4 +18,5 @@ BuildLog.htm
 mt.dep
 debuglog.*
 *.intermediate.manifest
+xcuserdata/
 

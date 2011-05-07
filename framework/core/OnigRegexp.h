@@ -57,6 +57,7 @@ typedef enum {
 	OnigRegexp* _expression;
 	OnigRegion* _region;
 	NSString* _target;
+    NSMutableArray* _captureNames;
 }
 
 - (NSString*)target;
@@ -75,6 +76,7 @@ typedef enum {
 - (NSString*)postMatch;
 
 // named capture support
+- (NSArray*) captureNames;
 - (int)indexForName:(NSString*)name;
 - (NSIndexSet*)indexesForName:(NSString*)name;
 - (NSString*)stringForName:(NSString*)name;

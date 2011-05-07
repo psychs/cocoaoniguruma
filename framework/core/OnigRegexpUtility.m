@@ -108,7 +108,7 @@ NSString* blockReplaceCallback(OnigResult* res, void* str, SEL sel)
 	BOOL lastNull = NO;
 	
 	OnigResult* res;
-	while (res = [pattern search:target start:start]) {
+	while ((res = [pattern search:target start:start])) {
 		NSRange range = [res bodyRange];
 		int end = range.location;
 		int right = NSMaxRange(range);
@@ -223,7 +223,7 @@ NSString* blockReplaceCallback(OnigResult* res, void* str, SEL sel)
 		}
 		if ([self length] < offset) break;
 		
-	} while (res = [pattern search:self start:offset]);
+	} while ((res = [pattern search:self start:offset]));
 	
 	if (offset < [self length]) {
 		[s appendString:[self substringFromIndex:offset]];
