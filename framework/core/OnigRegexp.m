@@ -280,7 +280,7 @@
 int co_name_callback(const OnigUChar* name, const OnigUChar* end, int ngroups, int* group_list, OnigRegex re, void* arg) {
 	OnigResult *result = (OnigResult *)arg;
 	
-	[[result captureNameArray] addObject:[NSString stringWithUTF8String:(const char*)name]];
+	[[result captureNameArray] addObject:[NSString stringWithCharacters:(unichar*)name length:((end-name)/CHAR_SIZE)]];
 	return 0;
 }
 
