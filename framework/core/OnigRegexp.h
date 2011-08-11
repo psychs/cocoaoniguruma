@@ -34,10 +34,15 @@ typedef enum {
 }
 
 + (OnigRegexp*)compile:(NSString*)expression;
++ (OnigRegexp*)compile:(NSString*)expression error:(NSError **)error;
 + (OnigRegexp*)compileIgnorecase:(NSString*)expression;
++ (OnigRegexp*)compileIgnorecase:(NSString*)expression error:(NSError **)error;
 + (OnigRegexp*)compile:(NSString*)expression ignorecase:(BOOL)ignorecase multiline:(BOOL)multiline;
++ (OnigRegexp*)compile:(NSString*)expression ignorecase:(BOOL)ignorecase multiline:(BOOL)multiline error:(NSError **)error;
 + (OnigRegexp*)compile:(NSString*)expression ignorecase:(BOOL)ignorecase multiline:(BOOL)multiline extended:(BOOL)extended;
++ (OnigRegexp*)compile:(NSString*)expression ignorecase:(BOOL)ignorecase multiline:(BOOL)multiline extended:(BOOL)extended error:(NSError **)error;
 + (OnigRegexp*)compile:(NSString*)expression options:(OnigOption)options;
++ (OnigRegexp*)compile:(NSString*)expression options:(OnigOption)options error:(NSError **)error;
 
 - (OnigResult*)search:(NSString*)target;
 - (OnigResult*)search:(NSString*)target start:(int)start;
