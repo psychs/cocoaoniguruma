@@ -49,31 +49,64 @@
 
 + (OnigRegexp*)compile:(NSString*)expression
 {
-	return [self compile:expression ignorecase:NO multiline:NO extended:NO];
+	return [self compile:expression ignorecase:NO multiline:NO extended:NO error:NULL];
+}
+
++ (OnigRegexp*)compile:(NSString*)expression error:(NSError **)error
+{
+	return [self compile:expression ignorecase:NO multiline:NO extended:NO error:error];
 }
 
 + (OnigRegexp*)compileIgnorecase:(NSString*)expression
 {
-	return [self compile:expression ignorecase:YES multiline:NO extended:NO];	 
+	return [self compile:expression ignorecase:YES multiline:NO extended:NO error:NULL];	 
+}
+
++ (OnigRegexp*)compileIgnorecase:(NSString*)expression error:(NSError **)error
+{
+	return [self compile:expression ignorecase:YES multiline:NO extended:NO error:error];
 }
 
 + (OnigRegexp*)compile:(NSString*)expression ignorecase:(BOOL)ignorecase multiline:(BOOL)multiline
 {
-	return [self compile:expression ignorecase:ignorecase multiline:multiline extended:NO];	 
+	return [self compile:expression ignorecase:ignorecase multiline:multiline extended:NO error:NULL];	 
+}
+
++ (OnigRegexp*)compile:(NSString*)expression ignorecase:(BOOL)ignorecase multiline:(BOOL)multiline error:(NSError **)error
+{
+	return [self compile:expression ignorecase:ignorecase multiline:multiline extended:NO error:NULL];
 }
 
 + (OnigRegexp*)compile:(NSString*)expression ignorecase:(BOOL)ignorecase multiline:(BOOL)multiline extended:(BOOL)extended
+{
+	return [self compile:expression ignorecase:ignorecase multiline:multiline extended:extended error:NULL];
+}
+
++ (OnigRegexp*)compile:(NSString*)expression ignorecase:(BOOL)ignorecase multiline:(BOOL)multiline extended:(BOOL)extended error:(NSError **)error
 {
 	OnigOption options = OnigOptionNone;
 	options |= multiline ? OnigOptionMultiline : OnigOptionSingleline;
 	if(ignorecase) options |= OnigOptionIgnorecase;
 	if(extended) options |= OnigOptionExtend;
-	return [self compile:expression options:options];
+	return [self compile:expression options:options error:error];
 }
 
 + (OnigRegexp*)compile:(NSString*)expression options:(OnigOption)theOptions
 {
-	if (!expression) return nil;
+	return [self compile:expression options:theOptions error:NULL];
+}
+
++ (OnigRegexp*)compile:(NSString*)expression options:(OnigOption)theOptions error:(NSError **)error
+{
+	if (!expression) {
+		if(error != NULL) {
+			//Make NSError;
+			NSDictionary* dict = [NSDictionary dictionaryWithObject:@"Invalid expression argument"
+					forKey:NSLocalizedDescriptionKey];
+			*error = [NSError errorWithDomain:@"CocoaOniguruma" code:ONIG_NORMAL userInfo:dict];
+		}
+		return nil;
+	}
 	
 	OnigOptionType option = theOptions;
 	
@@ -93,6 +126,16 @@
 		return [[[self alloc] initWithEntity:entity expression:expression] autorelease];
 	}
 	else {
+		if(error != NULL) {
+			//Make NSError;
+			UChar str[ONIG_MAX_ERROR_MESSAGE_LEN];
+			onig_error_code_to_str(str, status, &err);
+			NSString* errorStr = [NSString stringWithCString:(char*)str
+					encoding:NSASCIIStringEncoding];
+			NSDictionary* dict = [NSDictionary dictionaryWithObject:errorStr
+					forKey:NSLocalizedDescriptionKey];
+			*error = [NSError errorWithDomain:@"CocoaOniguruma" code:status userInfo:dict];
+		}
 		if (entity) onig_free(entity);
 		return nil;
 	}

@@ -184,4 +184,19 @@
 #endif
 }
 
+- (void)testError
+{
+	NSError *error = NULL;
+	id ret = [OnigRegexp compileIgnorecase:nil error:&error];
+	STAssertNil(ret, @"Parsed expression");
+	STAssertEquals([error code], (NSInteger)ONIG_NORMAL, @"Wrong error code");
+	STAssertEqualObjects([error localizedDescription], @"Invalid expression argument", nil);
+	
+	error = NULL;
+	ret = [OnigRegexp compileIgnorecase:@"(?<openb>\\[)?year(?(<openb>)\\])" error:&error];
+	STAssertNil(ret, @"Parsed expression");
+	STAssertEquals([error code], (NSInteger)ONIGERR_UNDEFINED_GROUP_OPTION, @"Wrong error code");
+	STAssertEqualObjects([error localizedDescription], @"undefined group option", nil);
+}
+
 @end
