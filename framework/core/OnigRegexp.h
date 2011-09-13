@@ -9,28 +9,28 @@
 @class OnigResult;
 
 typedef enum {
-	OnigOptionNone = ONIG_OPTION_NONE,
-	OnigOptionIgnorecase = ONIG_OPTION_IGNORECASE,
-	OnigOptionExtend = ONIG_OPTION_EXTEND,
-	OnigOptionMultiline = ONIG_OPTION_MULTILINE,
-	OnigOptionSingleline = ONIG_OPTION_SINGLELINE,
-	OnigOptionFindLongest = ONIG_OPTION_FIND_LONGEST,
-	OnigOptionFindNotEmpty = ONIG_OPTION_FIND_NOT_EMPTY,
-	OnigOptionNegateSingleLine = ONIG_OPTION_NEGATE_SINGLELINE,
-	OnigOptionDontCaptureGroup = ONIG_OPTION_DONT_CAPTURE_GROUP,
-	OnigOptionCaptureGroup = ONIG_OPTION_CAPTURE_GROUP,
-	
-	/* options (search time) */
-	OnigOptionNotbol = ONIG_OPTION_NOTBOL,
-	OnigOptionNoteol = ONIG_OPTION_NOTEOL,
-	OnigOptionPosixRegion = ONIG_OPTION_POSIX_REGION,
-	OnigOptionMaxbit = ONIG_OPTION_MAXBIT
+    OnigOptionNone = ONIG_OPTION_NONE,
+    OnigOptionIgnorecase = ONIG_OPTION_IGNORECASE,
+    OnigOptionExtend = ONIG_OPTION_EXTEND,
+    OnigOptionMultiline = ONIG_OPTION_MULTILINE,
+    OnigOptionSingleline = ONIG_OPTION_SINGLELINE,
+    OnigOptionFindLongest = ONIG_OPTION_FIND_LONGEST,
+    OnigOptionFindNotEmpty = ONIG_OPTION_FIND_NOT_EMPTY,
+    OnigOptionNegateSingleLine = ONIG_OPTION_NEGATE_SINGLELINE,
+    OnigOptionDontCaptureGroup = ONIG_OPTION_DONT_CAPTURE_GROUP,
+    OnigOptionCaptureGroup = ONIG_OPTION_CAPTURE_GROUP,
+    
+    /* options (search time) */
+    OnigOptionNotbol = ONIG_OPTION_NOTBOL,
+    OnigOptionNoteol = ONIG_OPTION_NOTEOL,
+    OnigOptionPosixRegion = ONIG_OPTION_POSIX_REGION,
+    OnigOptionMaxbit = ONIG_OPTION_MAXBIT
 } OnigOption;
 
 @interface OnigRegexp : NSObject
 {
-	regex_t* _entity;
-	NSString* _expression;
+    regex_t* _entity;
+    NSString* _expression;
 }
 
 + (OnigRegexp*)compile:(NSString*)expression;
@@ -59,10 +59,10 @@ typedef enum {
 
 @interface OnigResult : NSObject
 {
-	OnigRegexp* _expression;
-	OnigRegion* _region;
-	NSString* _target;
-	NSMutableArray* _captureNames;
+    OnigRegexp* _expression;
+    OnigRegion* _region;
+    NSString* _target;
+    NSMutableArray* _captureNames;
 }
 
 - (NSString*)target;
