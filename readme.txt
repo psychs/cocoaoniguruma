@@ -47,7 +47,7 @@ See also the Oniguruma's COPYING file.
 
 The New BSD License
 
-Copyright (c) 2008-2010  Satoshi Nakagawa  <psychs AT limechat DOT net>
+Copyright (c) 2008-2011  Satoshi Nakagawa  <psychs AT limechat DOT net>
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
