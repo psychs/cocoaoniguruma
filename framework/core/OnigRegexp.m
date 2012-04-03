@@ -114,13 +114,16 @@
     regex_t* entity = 0;
     const UChar* str = (const UChar*)[expression cStringUsingEncoding:STRING_ENCODING];
     
-    int status = onig_new(&entity,
-                          str,
-                          str + [expression length] * CHAR_SIZE,
-                          option,
-                          ONIG_ENCODING,
-                          ONIG_SYNTAX_DEFAULT,
-                          &err);
+    int status;
+    @synchronized([OnigRegexp class]) {
+        status = onig_new(&entity,
+                              str,
+                              str + [expression length] * CHAR_SIZE,
+                              option,
+                              ONIG_ENCODING,
+                              ONIG_SYNTAX_DEFAULT,
+                              &err);
+    }
     
     if (status == ONIG_NORMAL) {
         return [[[self alloc] initWithEntity:entity expression:expression] autorelease];
