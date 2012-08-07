@@ -12,6 +12,7 @@ Follow the steps to use CocoaOniguruma in your project.
 2. Open your project by Xcode.
 3. Add all .h, .c and .m files under "Classes".
 4. Import the header file, so you can use CocoaOniguruma.
+
 <pre><code>#import "OnigRegexp.h"</code></pre>
 
 ## How to use as a Framework
@@ -26,6 +27,7 @@ Follow the steps to use CocoaOniguruma in your project.
 8. Right click on the application target to open context menu and add a "New Copy Files Build Phase".
 9. Drag "CocoaOniguruma.framework" into the new "Copy Files" phase.
 10. Import the header file, so you can use CocoaOniguruma.
+
 <pre><code>#import "CocoaOniguruma/OnigRegexp.h"</code></pre>
 
 ## The Author
