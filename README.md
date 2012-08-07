@@ -1,10 +1,9 @@
-
-* What is CocoaOniguruma
+# CocoaOniguruma
 
 CocoaOniguruma is an Objective-C binding of Oniguruma regular expression engine.
 It's simple and tiny compared to the other bindings.
 
-* How to use
+## How to use
 
 CocoaOniguruma is provided as assorted source files primarily.
 Follow the steps to use CocoaOniguruma in your project.
@@ -15,7 +14,7 @@ Follow the steps to use CocoaOniguruma in your project.
 4. Import the header file, so you can use CocoaOniguruma.
     #import "OnigRegexp.h"
 
-* How to use as a Framework
+## How to use as a Framework
 
  1. Open CocoaOniguruma.xcodeproj by Xcode.
  2. Select "CocoaOniguruma" for Active Target and "Release" for Active Build Configuration.
@@ -29,22 +28,23 @@ Follow the steps to use CocoaOniguruma in your project.
 10. Import the header file, so you can use CocoaOniguruma.
     #import "CocoaOniguruma/OnigRegexp.h"
 
-* The Author
+## The Author
 
-Satoshi Nakagawa <psychs AT limechat DOT net>
-http://limechat.net/psychs/
-#limechat on irc.freenode.net
+* Satoshi Nakagawa http://github.com/psychs
+* http://limechat.net/psychs/
+* #limechat on irc.freenode.net
 
-* Thanks
+## Thanks
 
 The specifications and implementations of split and replace functions are based on ruby.
 Thanks to Matz.
 
-* License
+## License
 
 CocoaOniguruma contains a part of Oniguruma 5.9.2 source code currently.
 See also the Oniguruma's COPYING file.
 
+<pre>
 The New BSD License
 
 Copyright (c) 2008-2011  Satoshi Nakagawa  <psychs AT limechat DOT net>
@@ -70,3 +70,4 @@ HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
 LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
 OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 SUCH DAMAGE.
+</pre>
