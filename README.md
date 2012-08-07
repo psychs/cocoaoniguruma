@@ -1,7 +1,8 @@
 # CocoaOniguruma
 
-CocoaOniguruma is an Objective-C binding of Oniguruma regular expression engine.
-It's simple and tiny compared to the other bindings.
+CocoaOniguruma is an Objective-C binding of Oniguruma regular expression engine. It's simple and tiny compared to the other bindings.
+
+It supports iOS 4+ and Mac OS X 10.6+ on both ARC and non ARC environments.
 
 ## How to use
 
