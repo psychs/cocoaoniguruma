@@ -236,6 +236,11 @@ static int captureNameCallback(const OnigUChar* name, const OnigUChar* end, int 
     }
 }
 
+- (NSUInteger)captureCount
+{
+  return onig_number_of_captures(_entity);
+}
+
 - (NSString*)expression
 {
     return _expression;
