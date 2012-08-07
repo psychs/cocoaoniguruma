@@ -16,10 +16,20 @@
 
 @interface OnigResult (Private)
 - (id)initWithRegexp:(OnigRegexp*)expression region:(OnigRegion*)region target:(NSString*)target;
-
-- (NSMutableArray*) captureNameArray;
-
+- (NSMutableArray*)captureNameArray;
 @end
+
+
+static int captureNameCallback(const OnigUChar* name, const OnigUChar* end, int ngroups, int* group_list, OnigRegex re, void* arg) {
+    OnigResult *result = nil;
+#if __has_feature(objc_arc)
+    result = (__bridge OnigResult *)arg;
+#else
+    result = (OnigResult *)arg;
+#endif
+    [[result captureNameArray] addObject:[NSString stringWithCharacters:(unichar*)name length:((end-name)/CHAR_SIZE)]];
+    return 0;
+}
 
 
 @implementation OnigRegexp
@@ -37,8 +47,10 @@
 - (void)dealloc
 {
     if (_entity) onig_free(_entity);
+#if !__has_feature(objc_arc)
     [_expression release];
     [super dealloc];
+#endif
 }
 
 - (void)finalize
@@ -126,7 +138,11 @@
     }
     
     if (status == ONIG_NORMAL) {
-        return [[[self alloc] initWithEntity:entity expression:expression] autorelease];
+        OnigRegexp* regexp = [[self alloc] initWithEntity:entity expression:expression];
+#if !__has_feature(objc_arc)
+        [regexp autorelease];
+#endif
+        return regexp;
     }
     else {
         if(error != NULL) {
@@ -171,7 +187,11 @@
                              ONIG_OPTION_NONE);
     
     if (status != ONIG_MISMATCH) {
-        return [[[OnigResult alloc] initWithRegexp:self region:region target:target] autorelease];
+        OnigResult* result = [[OnigResult alloc] initWithRegexp:self region:region target:target];
+#if !__has_feature(objc_arc)
+        [result autorelease];
+#endif
+        return result;
     }
     else {
         onig_region_free(region, 1);
@@ -204,7 +224,11 @@
                             ONIG_OPTION_NONE);
     
     if (status != ONIG_MISMATCH) {
-        return [[[OnigResult alloc] initWithRegexp:self region:region target:target] autorelease];
+        OnigResult* result = [[OnigResult alloc] initWithRegexp:self region:region target:target];
+#if !__has_feature(objc_arc)
+        [result autorelease];
+#endif
+        return result;
     }
     else {
         onig_region_free(region, 1);
@@ -231,26 +255,30 @@
 {
     self = [super init];
     if (self) {
-        _expression = [expression retain];
+        _expression = expression;
+#if !__has_feature(objc_arc)
+        [_expression retain];
+#endif
         _region = region;
         _target = [target copy];
-        _captureNames = [NSMutableArray array];
+        _captureNames = [NSMutableArray new];
     }
     return self;
 }
 
 - (void)dealloc
 {
-    [_expression release];
     if (_region) onig_region_free(_region, 1);
+#if !__has_feature(objc_arc)
+    [_expression release];
     [_target release];
     [super dealloc];
+#endif
 }
 
-- (void)finalize
+- (OnigRegexp*)_expression
 {
-    if (_region) onig_region_free(_region, 1);
-    [super finalize];
+    return _expression;
 }
 
 - (NSString*)target
@@ -322,17 +350,15 @@
     return self->_captureNames;
 }
 
-// Used to get list of names
-int co_name_callback(const OnigUChar* name, const OnigUChar* end, int ngroups, int* group_list, OnigRegex re, void* arg) {
-    OnigResult *result = (OnigResult *)arg;
-    
-    [[result captureNameArray] addObject:[NSString stringWithCharacters:(unichar*)name length:((end-name)/CHAR_SIZE)]];
-    return 0;
-}
-
 - (NSArray*)captureNames
 {
-    onig_foreach_name([self->_expression entity], co_name_callback, self);
+    void* voidSelf = NULL;
+#if __has_feature(objc_arc)
+    voidSelf = (__bridge void*)self;
+#else
+    voidSelf = (void*)self;
+#endif
+    onig_foreach_name([[self _expression] entity], captureNameCallback, voidSelf);
     return [NSArray arrayWithArray:self->_captureNames];
 }
 

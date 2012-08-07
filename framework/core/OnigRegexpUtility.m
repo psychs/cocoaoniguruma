@@ -3,31 +3,32 @@
 
 #import "OnigRegexpUtility.h"
 
-typedef NSString* (*ReplaceCallback)(OnigResult*, void*, SEL);
+typedef NSString* (*OnigReplaceCallback)(OnigResult*, void*, SEL);
 
-NSString* stringReplaceCallback(OnigResult* res, void* str, SEL sel)
+static NSString* stringReplaceCallback(OnigResult* res, void* str, SEL sel)
 {
+#if __has_feature(objc_arc)
+    return (__bridge NSString*)str;
+#else
     return (NSString*)str;
-} 
+#endif
+}
 
-NSString* selectorReplaceCallback(OnigResult* res, void* str, SEL sel)
+static NSString* blockReplaceCallback(OnigResult* res, void* str, SEL sel)
 {
-    id object = str;
-    return [object performSelector:sel withObject:res];
-} 
-
-#if defined(NS_BLOCKS_AVAILABLE)
-NSString* blockReplaceCallback(OnigResult* res, void* str, SEL sel)
-{
-    NSString* (^block)(OnigResult*) = (NSString* (^)(OnigResult*))str;
+    NSString* (^block)(OnigResult*) = nil;
+#if __has_feature(objc_arc)
+    block = (__bridge NSString* (^)(OnigResult*))str;
+#else
+    block = (NSString* (^)(OnigResult*))str;
+#endif
     return block(res);
 } 
-#endif
 
 @interface NSString (OnigRegexpNSStringUtilityPrivate)
-- (NSArray*)__split:(id)pattern limit:(NSNumber*)limit;
-- (NSString*)__replaceByRegexp:(id)pattern withCallback:(ReplaceCallback)cp data:(void*)data selector:(SEL)sel;
-- (NSString*)__replaceAllByRegexp:(id)pattern withCallback:(ReplaceCallback)cp data:(void*)data selector:(SEL)sel;
+- (NSArray*)split:(id)pattern limit:(NSNumber*)limit;
+- (NSString*)replaceByRegexp:(id)pattern withCallback:(OnigReplaceCallback)cp data:(void*)data selector:(SEL)sel;
+- (NSString*)replaceAllByRegexp:(id)pattern withCallback:(OnigReplaceCallback)cp data:(void*)data selector:(SEL)sel;
 @end
 
 
@@ -50,19 +51,19 @@ NSString* blockReplaceCallback(OnigResult* res, void* str, SEL sel)
 
 - (NSArray*)splitByRegexp:(id)pattern
 {
-    return [self __split:pattern limit:nil];
+    return [self split:pattern limit:nil];
 }
 
 - (NSArray*)splitByRegexp:(id)pattern limit:(int)limit
 {
-    return [self __split:pattern limit:[NSNumber numberWithInt:limit]];
+    return [self split:pattern limit:[NSNumber numberWithInt:limit]];
 }
 
 // 
 // This implementation is based on ruby 1.8.
 // 
 
-- (NSArray*)__split:(id)pattern limit:(NSNumber*)limitNum
+- (NSArray*)split:(id)pattern limit:(NSNumber*)limitNum
 {
     NSString* target = self;
     
@@ -97,7 +98,10 @@ NSString* blockReplaceCallback(OnigResult* res, void* str, SEL sel)
         }
         else if (limit == 1) {
             if ([target length] == 0) return [NSArray array];
-            return [NSArray arrayWithObjects:[[target copy] autorelease], nil];
+#if !__has_feature(objc_arc)
+            target = [[target copy] autorelease];
+#endif
+            return [NSArray arrayWithObject:target];
         }
         i = 1;
     }
@@ -156,7 +160,7 @@ NSString* blockReplaceCallback(OnigResult* res, void* str, SEL sel)
     return array;
 }
 
-- (NSString*)__replaceByRegexp:(id)pattern withCallback:(ReplaceCallback)cp data:(void*)data selector:(SEL)sel
+- (NSString*)replaceByRegexp:(id)pattern withCallback:(OnigReplaceCallback)callback data:(void*)data selector:(SEL)sel
 {
     if (![pattern isKindOfClass:[OnigRegexp class]]) {
         pattern = [OnigRegexp compile:(NSString*)pattern];
@@ -164,37 +168,37 @@ NSString* blockReplaceCallback(OnigResult* res, void* str, SEL sel)
     
     OnigResult* res = [pattern search:self];
     if (res) {
-        NSMutableString* s = [[self mutableCopy] autorelease];
-        [s replaceCharactersInRange:[res bodyRange] withString:cp(res, data, sel)];
+        NSMutableString* s = [self mutableCopy];
+#if !__has_feature(objc_arc)
+        [s autorelease];
+#endif
+        [s replaceCharactersInRange:[res bodyRange] withString:callback(res, data, sel)];
         return s;
     }
     else {
-        return [[self mutableCopy] autorelease];
+        NSString* s = [self copy];
+#if !__has_feature(objc_arc)
+        [s autorelease];
+#endif
+        return s;
     }
 }
 
 - (NSString*)replaceByRegexp:(id)pattern with:(NSString*)string
 {
-    return [self __replaceByRegexp:pattern withCallback:stringReplaceCallback data:string selector:Nil];
+    return [self replaceByRegexp:pattern withCallback:stringReplaceCallback data:(void*)string selector:Nil];
 }
 
-- (NSString*)replaceByRegexp:(id)pattern withCallback:(id)object selector:(SEL)sel
-{
-    return [self __replaceByRegexp:pattern withCallback:selectorReplaceCallback data:object selector:sel];
-}
-
-#if defined(NS_BLOCKS_AVAILABLE)
 - (NSString*)replaceByRegexp:(id)pattern withBlock:(NSString* (^)(OnigResult*))block
 {
-    return [self __replaceByRegexp:pattern withCallback:blockReplaceCallback data:block selector:Nil];
+    return [self replaceByRegexp:pattern withCallback:blockReplaceCallback data:(void*)block selector:Nil];
 }
-#endif
 
 // 
 // This implementation is based on ruby 1.8.
 // 
 
-- (NSString*)__replaceAllByRegexp:(id)pattern withCallback:(ReplaceCallback)cp data:(void*)data selector:(SEL)sel
+- (NSString*)__replaceAllByRegexp:(id)pattern withCallback:(OnigReplaceCallback)callback data:(void*)data selector:(SEL)sel
 {
     if (![pattern isKindOfClass:[OnigRegexp class]]) {
         pattern = [OnigRegexp compile:(NSString*)pattern];
@@ -202,7 +206,11 @@ NSString* blockReplaceCallback(OnigResult* res, void* str, SEL sel)
     
     OnigResult* res = [pattern search:self];
     if (!res) {
-        return [[self mutableCopy] autorelease];
+        NSString* s = [self copy];
+#if !__has_feature(objc_arc)
+        [s autorelease];
+#endif
+        return s;
     }
     
     NSMutableString* s = [NSMutableString string];
@@ -212,7 +220,7 @@ NSString* blockReplaceCallback(OnigResult* res, void* str, SEL sel)
         NSRange range = [res bodyRange];
         int len = range.location-offset;
         if (len > 0) [s appendString:[self substringWithRange:NSMakeRange(offset, len)]];
-        [s appendString:cp(res, data, sel)];
+        [s appendString:callback(res, data, sel)];
         
         offset = NSMaxRange(range);
         if (range.length == 0) {
@@ -234,20 +242,13 @@ NSString* blockReplaceCallback(OnigResult* res, void* str, SEL sel)
 
 - (NSString*)replaceAllByRegexp:(id)pattern with:(NSString*)string
 {
-    return [self __replaceAllByRegexp:pattern withCallback:stringReplaceCallback data:string selector:Nil];
+    return [self replaceAllByRegexp:pattern withCallback:stringReplaceCallback data:(void*)string selector:Nil];
 }
 
-- (NSString*)replaceAllByRegexp:(id)pattern withCallback:(id)object selector:(SEL)sel
-{
-    return [self __replaceAllByRegexp:pattern withCallback:selectorReplaceCallback data:object selector:sel];
-}
-
-#if defined(NS_BLOCKS_AVAILABLE)
 - (NSString*)replaceAllByRegexp:(id)pattern withBlock:(NSString* (^)(OnigResult*))block
 {
-    return [self __replaceAllByRegexp:pattern withCallback:blockReplaceCallback data:block selector:Nil];
+    return [self replaceAllByRegexp:pattern withCallback:blockReplaceCallback data:(void*)block selector:Nil];
 }
-#endif
 
 @end
 
@@ -264,17 +265,6 @@ NSString* blockReplaceCallback(OnigResult* res, void* str, SEL sel)
     return (NSMutableString*)[super replaceAllByRegexp:pattern with:string];
 }
 
-- (NSMutableString*)replaceByRegexp:(id)pattern withCallback:(id)object selector:(SEL)sel
-{
-    return (NSMutableString*)[super replaceByRegexp:pattern withCallback:object selector:sel];
-}
-
-- (NSMutableString*)replaceAllByRegexp:(id)pattern withCallback:(id)object selector:(SEL)sel
-{
-    return (NSMutableString*)[super replaceAllByRegexp:pattern withCallback:object selector:sel];
-}
-
-#if defined(NS_BLOCKS_AVAILABLE)
 - (NSMutableString*)replaceByRegexp:(id)pattern withBlock:(NSString* (^)(OnigResult*))block
 {
     return (NSMutableString*)[super replaceByRegexp:pattern withBlock:block];
@@ -284,6 +274,5 @@ NSString* blockReplaceCallback(OnigResult* res, void* str, SEL sel)
 {
     return (NSMutableString*)[super replaceAllByRegexp:pattern withBlock:block];
 }
-#endif
 
 @end

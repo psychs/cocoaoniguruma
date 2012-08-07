@@ -27,13 +27,8 @@
 - (NSString*)replaceByRegexp:(id)pattern with:(NSString*)string;
 - (NSString*)replaceAllByRegexp:(id)pattern with:(NSString*)string;
 
-- (NSString*)replaceByRegexp:(id)pattern withCallback:(id)object selector:(SEL)sel;
-- (NSString*)replaceAllByRegexp:(id)pattern withCallback:(id)object selector:(SEL)sel;
-
-#if defined(NS_BLOCKS_AVAILABLE)
 - (NSString*)replaceByRegexp:(id)pattern withBlock:(NSString* (^)(OnigResult*))block;
 - (NSString*)replaceAllByRegexp:(id)pattern withBlock:(NSString* (^)(OnigResult*))block;
-#endif
 
 @end
 
@@ -47,11 +42,7 @@
 - (NSMutableString*)replaceByRegexp:(id)pattern with:(NSString*)string;
 - (NSMutableString*)replaceAllByRegexp:(id)pattern with:(NSString*)string;
 
-- (NSMutableString*)replaceByRegexp:(id)pattern withCallback:(id)object selector:(SEL)sel;
-- (NSMutableString*)replaceAllByRegexp:(id)pattern withCallback:(id)object selector:(SEL)sel;
-
-#if defined(NS_BLOCKS_AVAILABLE)
 - (NSMutableString*)replaceByRegexp:(id)pattern withBlock:(NSString* (^)(OnigResult*))block;
 - (NSMutableString*)replaceAllByRegexp:(id)pattern withBlock:(NSString* (^)(OnigResult*))block;
-#endif
+
 @end

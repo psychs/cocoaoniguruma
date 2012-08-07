@@ -135,7 +135,6 @@
     STAssertEqualObjects([@"hello!" replaceByRegexp:@"(.)(.)" withCallback:self selector:@selector(describeReplace:)], @"NSCFString[he]llo!", nil);
     STAssertEqualObjects([@"hello" replaceByRegexp:@"l" withCallback:self selector:@selector(xReplace:)], @"hexlo", nil);
     
-#if defined(NS_BLOCKS_AVAILABLE)
     STAssertEqualObjects([@"hello" replaceByRegexp:@"." withBlock:^(OnigResult* res) {
         unichar ch[2];
         ch[0] = [[res body] characterAtIndex:0] + 1;
@@ -152,7 +151,6 @@
     STAssertEqualObjects([@"hello" replaceByRegexp:@"l" withBlock:^(OnigResult* res) {
         return @"x";
     }], @"hexlo", nil);
-#endif
 }
 
 - (void)testReplaceAll
@@ -167,7 +165,6 @@
     STAssertEqualObjects([@"hello!" replaceAllByRegexp:@"(.)(.)" withCallback:self selector:@selector(describeReplace:)], @"NSCFString[he]NSCFString[ll]NSCFString[o!]", nil);
     STAssertEqualObjects([@"hello" replaceAllByRegexp:@"l" withCallback:self selector:@selector(xReplace:)], @"hexxo", nil);
     
-#if defined(NS_BLOCKS_AVAILABLE)
     STAssertEqualObjects([@"hello" replaceAllByRegexp:@"." withBlock:^(OnigResult* res) {
         unichar ch[2];
         ch[0] = [[res body] characterAtIndex:0] + 1;
@@ -184,7 +181,6 @@
     STAssertEqualObjects([@"hello" replaceAllByRegexp:@"l" withBlock:^(OnigResult* res) {
         return @"x";
     }], @"hexxo", nil);
-#endif
 }
 
 - (void)testError
