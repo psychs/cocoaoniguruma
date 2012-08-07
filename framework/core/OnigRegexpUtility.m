@@ -54,9 +54,9 @@ static NSString* blockReplaceCallback(OnigResult* res, void* str, SEL sel)
     return [self split:pattern limit:nil];
 }
 
-- (NSArray*)splitByRegexp:(id)pattern limit:(int)limit
+- (NSArray*)splitByRegexp:(id)pattern limit:(NSInteger)limit
 {
-    return [self split:pattern limit:[NSNumber numberWithInt:limit]];
+    return [self split:pattern limit:[NSNumber numberWithInteger:limit]];
 }
 
 // 
@@ -176,7 +176,7 @@ static NSString* blockReplaceCallback(OnigResult* res, void* str, SEL sel)
         return s;
     }
     else {
-        NSString* s = [self copy];
+        NSString* s = [self mutableCopy];
 #if !__has_feature(objc_arc)
         [s autorelease];
 #endif
@@ -198,7 +198,7 @@ static NSString* blockReplaceCallback(OnigResult* res, void* str, SEL sel)
 // This implementation is based on ruby 1.8.
 // 
 
-- (NSString*)__replaceAllByRegexp:(id)pattern withCallback:(OnigReplaceCallback)callback data:(void*)data selector:(SEL)sel
+- (NSString*)replaceAllByRegexp:(id)pattern withCallback:(OnigReplaceCallback)callback data:(void*)data selector:(SEL)sel
 {
     if (![pattern isKindOfClass:[OnigRegexp class]]) {
         pattern = [OnigRegexp compile:(NSString*)pattern];
@@ -206,7 +206,7 @@ static NSString* blockReplaceCallback(OnigResult* res, void* str, SEL sel)
     
     OnigResult* res = [pattern search:self];
     if (!res) {
-        NSString* s = [self copy];
+        NSString* s = [self mutableCopy];
 #if !__has_feature(objc_arc)
         [s autorelease];
 #endif

@@ -20,7 +20,7 @@
 
 - (NSArray*)split;
 - (NSArray*)splitByRegexp:(id)pattern;
-- (NSArray*)splitByRegexp:(id)pattern limit:(int)limit;
+- (NSArray*)splitByRegexp:(id)pattern limit:(NSInteger)limit;
 
 // based on ruby's gsub
 

@@ -53,12 +53,6 @@ static int captureNameCallback(const OnigUChar* name, const OnigUChar* end, int 
 #endif
 }
 
-- (void)finalize
-{
-    if (_entity) onig_free(_entity);
-    [super finalize];
-}
-
 + (OnigRegexp*)compile:(NSString*)expression
 {
     return [self compile:expression ignorecase:NO multiline:NO extended:NO error:NULL];
@@ -238,7 +232,7 @@ static int captureNameCallback(const OnigUChar* name, const OnigUChar* end, int 
 
 - (NSUInteger)captureCount
 {
-  return onig_number_of_captures(_entity);
+    return onig_number_of_captures(_entity);
 }
 
 - (NSString*)expression
@@ -296,12 +290,12 @@ static int captureNameCallback(const OnigUChar* name, const OnigUChar* end, int 
     return [self count];
 }
 
-- (int)count
+- (NSUInteger)count
 {
     return _region->num_regs;
 }
 
-- (NSString*)stringAt:(int)index
+- (NSString*)stringAt:(NSUInteger)index
 {
     return [_target substringWithRange:[self rangeAt:index]];
 }
@@ -316,17 +310,17 @@ static int captureNameCallback(const OnigUChar* name, const OnigUChar* end, int 
     return array;
 }
 
-- (NSRange)rangeAt:(int)index
+- (NSRange)rangeAt:(NSUInteger)index
 {
     return NSMakeRange([self locationAt:index], [self lengthAt:index]);
 }
 
-- (int)locationAt:(int)index
+- (NSUInteger)locationAt:(NSUInteger)index
 {
     return *(_region->beg + index) / CHAR_SIZE;
 }
 
-- (int)lengthAt:(int)index
+- (NSUInteger)lengthAt:(NSUInteger)index
 {
     return (*(_region->end + index) - *(_region->beg + index)) / CHAR_SIZE;
 }
@@ -351,7 +345,8 @@ static int captureNameCallback(const OnigUChar* name, const OnigUChar* end, int 
     return [_target substringFromIndex:[self locationAt:0] + [self lengthAt:0]];
 }
 
-- (NSMutableArray*) captureNameArray {
+- (NSMutableArray*)captureNameArray
+{
     return self->_captureNames;
 }
 
@@ -367,7 +362,7 @@ static int captureNameCallback(const OnigUChar* name, const OnigUChar* end, int 
     return [NSArray arrayWithArray:self->_captureNames];
 }
 
-- (int)indexForName:(NSString*)name
+- (NSInteger)indexForName:(NSString*)name
 {
     NSIndexSet* indexes = [self indexesForName:name];
     return indexes ? [indexes firstIndex] : -1;
