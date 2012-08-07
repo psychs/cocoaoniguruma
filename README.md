@@ -16,15 +16,15 @@ Follow the steps to use CocoaOniguruma in your project.
 
 ## How to use as a Framework
 
- 1. Open CocoaOniguruma.xcodeproj by Xcode.
- 2. Select "CocoaOniguruma" for Active Target and "Release" for Active Build Configuration.
- 3. Build it.
- 4. Copy "build/Release/CocoaOniguruma.framework" into your project directory.
- 5. Open your project by Xcode.
- 6. Add the framework to your project under "Frameworks".
- 7. Open "Targets" in the project tree.
- 8. Right click on the application target to open context menu and add a "New Copy Files Build Phase".
- 9. Drag "CocoaOniguruma.framework" into the new "Copy Files" phase.
+1. Open CocoaOniguruma.xcodeproj by Xcode.
+2. Select "CocoaOniguruma" for Active Target and "Release" for Active Build Configuration.
+3. Build it.
+4. Copy "build/Release/CocoaOniguruma.framework" into your project directory.
+5. Open your project by Xcode.
+6. Add the framework to your project under "Frameworks".
+7. Open "Targets" in the project tree.
+8. Right click on the application target to open context menu and add a "New Copy Files Build Phase".
+9. Drag "CocoaOniguruma.framework" into the new "Copy Files" phase.
 10. Import the header file, so you can use CocoaOniguruma.
 <pre><code>#import "CocoaOniguruma/OnigRegexp.h"</code></pre>
 
@@ -48,7 +48,7 @@ See also the Oniguruma's COPYING file.
 <pre>
 The New BSD License
 
-Copyright (c) 2008-2011  Satoshi Nakagawa  <psychs AT limechat DOT net>
+Copyright (c) 2008-2012  Satoshi Nakagawa  <psychs AT limechat DOT net>
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
