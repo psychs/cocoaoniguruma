@@ -19,4 +19,5 @@ mt.dep
 debuglog.*
 *.intermediate.manifest
 xcuserdata/
-
+*.xccheckout
+*.xcsettings
