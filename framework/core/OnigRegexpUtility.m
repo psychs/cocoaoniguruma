@@ -114,8 +114,8 @@ static NSString* blockReplaceCallback(OnigResult* res, void* str, SEL sel)
     OnigResult* res;
     while ((res = [pattern search:target start:start])) {
         NSRange range = [res bodyRange];
-        int end = range.location;
-        int right = NSMaxRange(range);
+        int end = (int) range.location;
+        int right = (int) NSMaxRange(range);
         
         if (start == end && range.length == 0) {
             if ([target length] == 0) {
@@ -218,11 +218,11 @@ static NSString* blockReplaceCallback(OnigResult* res, void* str, SEL sel)
     
     do {
         NSRange range = [res bodyRange];
-        int len = range.location-offset;
+        int len = (int) range.location-offset;
         if (len > 0) [s appendString:[self substringWithRange:NSMakeRange(offset, len)]];
         [s appendString:callback(res, data, sel)];
         
-        offset = NSMaxRange(range);
+        offset = (int) NSMaxRange(range);
         if (range.length == 0) {
             // consume 1 character at least
             if ([self length] <= offset) break;

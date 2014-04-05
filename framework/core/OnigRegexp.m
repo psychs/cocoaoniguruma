@@ -167,7 +167,7 @@ static int captureNameCallback(const OnigUChar* name, const OnigUChar* end, int 
 - (OnigResult*)search:(NSString*)target start:(int)start end:(int)end
 {
     if (!target) return nil;
-    if (end < 0) end = [target length];
+    if (end < 0) end = (int) [target length];
     
     OnigRegion* region = onig_region_new();
     const UChar* str = (const UChar*)[target cStringUsingEncoding:STRING_ENCODING];
@@ -195,7 +195,7 @@ static int captureNameCallback(const OnigUChar* name, const OnigUChar* end, int 
 
 - (OnigResult*)search:(NSString*)target range:(NSRange)range
 {
-    return [self search:target start:range.location end:NSMaxRange(range)];
+    return [self search:target start:(int) range.location end:(int) NSMaxRange(range)];
 }
 
 - (OnigResult*)match:(NSString*)target
@@ -287,7 +287,7 @@ static int captureNameCallback(const OnigUChar* name, const OnigUChar* end, int 
 
 - (int)size
 {
-    return [self count];
+    return (int) [self count];
 }
 
 - (NSUInteger)count
@@ -304,7 +304,7 @@ static int captureNameCallback(const OnigUChar* name, const OnigUChar* end, int 
 {
     NSMutableArray* array = [NSMutableArray array];
     int i, count;
-    for (i=0, count=[self count]; i<count; i++) {
+    for (i=0, count=(int) [self count]; i<count; i++) {
         [array addObject:[self stringAt:i]];
     }
     return array;
@@ -386,7 +386,7 @@ static int captureNameCallback(const OnigUChar* name, const OnigUChar* end, int 
 
 - (NSString*)stringForName:(NSString*)name
 {
-    int n = [self indexForName:name];
+    int n = (int) [self indexForName:name];
     return n < 0 ? nil : [self stringAt:n];
 }
 
