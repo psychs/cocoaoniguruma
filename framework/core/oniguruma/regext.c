@@ -30,64 +30,11 @@
 #include "regint.h"
 
 static void
-conv_ext0be32(const UChar* s, const UChar* end, UChar* conv)
-{
-  while (s < end) {
-    *conv++ = '\0';
-    *conv++ = '\0';
-    *conv++ = '\0';
-    *conv++ = *s++;
-  }
-}
-
-static void
-conv_ext0le32(const UChar* s, const UChar* end, UChar* conv)
-{
-  while (s < end) {
-    *conv++ = *s++;
-    *conv++ = '\0';
-    *conv++ = '\0';
-    *conv++ = '\0';
-  }
-}
-
-static void
-conv_ext0be(const UChar* s, const UChar* end, UChar* conv)
-{
-  while (s < end) {
-    *conv++ = '\0';
-    *conv++ = *s++;
-  }
-}
-
-static void
 conv_ext0le(const UChar* s, const UChar* end, UChar* conv)
 {
   while (s < end) {
     *conv++ = *s++;
     *conv++ = '\0';
-  }
-}
-
-static void
-conv_swap4bytes(const UChar* s, const UChar* end, UChar* conv)
-{
-  while (s < end) {
-    *conv++ = s[3];
-    *conv++ = s[2];
-    *conv++ = s[1];
-    *conv++ = s[0];
-    s += 4;
-  }
-}
-
-static void
-conv_swap2bytes(const UChar* s, const UChar* end, UChar* conv)
-{
-  while (s < end) {
-    *conv++ = s[1];
-    *conv++ = s[0];
-    s += 2;
   }
 }
 
