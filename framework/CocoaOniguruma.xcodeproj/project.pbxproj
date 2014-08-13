@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		285A5408199C318B00932DDE /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 285A5407199C318B00932DDE /* SenTestingKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		7807AC380E2FBB8600A5AB6A /* OnigRegexp.h in Headers */ = {isa = PBXBuildFile; fileRef = 7807AC1A0E2FBB8600A5AB6A /* OnigRegexp.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7807AC390E2FBB8600A5AB6A /* OnigRegexp.m in Sources */ = {isa = PBXBuildFile; fileRef = 7807AC1B0E2FBB8600A5AB6A /* OnigRegexp.m */; };
 		7807AC3A0E2FBB8600A5AB6A /* OnigRegexpUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 7807AC1C0E2FBB8600A5AB6A /* OnigRegexpUtility.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -32,7 +33,6 @@
 		7807AC520E2FBB8600A5AB6A /* st.h in Headers */ = {isa = PBXBuildFile; fileRef = 7807AC360E2FBB8600A5AB6A /* st.h */; };
 		78C5E1CD0E39CE5F00F62F5D /* OnigRegexpTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 78C5E1B70E39CDEE00F62F5D /* OnigRegexpTest.m */; };
 		78C5E21F0E39CF7300F62F5D /* CocoaOniguruma.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* CocoaOniguruma.framework */; };
-		78C5E2310E39CFEA00F62F5D /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C5E2300E39CFEA00F62F5D /* SenTestingKit.framework */; };
 		78C5E26C0E39D0BD00F62F5D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C5E26B0E39D0BD00F62F5D /* Foundation.framework */; };
 		78C5E3B10E39E38C00F62F5D /* CocoaOniguruma.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* CocoaOniguruma.framework */; };
 		78C5E3D00E39E42000F62F5D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 78C5E3C00E39E3D900F62F5D /* main.m */; };
@@ -59,6 +59,7 @@
 
 /* Begin PBXFileReference section */
 		089C1667FE841158C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		285A5407199C318B00932DDE /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		32DBCF5E0370ADEE00C91783 /* CocoaOniguruma_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoaOniguruma_Prefix.pch; sourceTree = "<group>"; };
 		7807AC1A0E2FBB8600A5AB6A /* OnigRegexp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnigRegexp.h; sourceTree = "<group>"; };
 		7807AC1B0E2FBB8600A5AB6A /* OnigRegexp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnigRegexp.m; sourceTree = "<group>"; };
@@ -100,8 +101,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				285A5408199C318B00932DDE /* SenTestingKit.framework in Frameworks */,
 				78C5E21F0E39CF7300F62F5D /* CocoaOniguruma.framework in Frameworks */,
-				78C5E2310E39CFEA00F62F5D /* SenTestingKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,6 +151,7 @@
 		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				285A5407199C318B00932DDE /* SenTestingKit.framework */,
 				78C5E26B0E39D0BD00F62F5D /* Foundation.framework */,
 				78C5E2300E39CFEA00F62F5D /* SenTestingKit.framework */,
 			);
@@ -329,7 +331,7 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastTestingUpgradeCheck = 0510;
+				LastTestingUpgradeCheck = 0600;
 				LastUpgradeCheck = 0510;
 			};
 			buildConfigurationList = 1DEB91B108733DA50010E9CD /* Build configuration list for PBXProject "CocoaOniguruma" */;
@@ -520,7 +522,10 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -543,7 +548,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Cocoa.framework/Headers/Cocoa.h";
