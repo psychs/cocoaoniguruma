@@ -34,7 +34,7 @@ static int captureNameCallback(const OnigUChar* name, const OnigUChar* end, int 
 
 @implementation OnigRegexp
 
-- (id)initWithEntity:(regex_t*)entity expression:(NSString*)expression
+- (id)initWithEntity:(onig_regex_t*)entity expression:(NSString*)expression
 {
     self = [super init];
     if (self) {
@@ -117,7 +117,7 @@ static int captureNameCallback(const OnigUChar* name, const OnigUChar* end, int 
     OnigOptionType option = theOptions;
     
     OnigErrorInfo err;
-    regex_t* entity = 0;
+    onig_regex_t* entity = 0;
     const UChar* str = (const UChar*)[expression cStringUsingEncoding:STRING_ENCODING];
     
     int status;
@@ -240,7 +240,7 @@ static int captureNameCallback(const OnigUChar* name, const OnigUChar* end, int 
     return _expression;
 }
 
-- (regex_t*)entity
+- (onig_regex_t*)entity
 {
     return _entity;
 }

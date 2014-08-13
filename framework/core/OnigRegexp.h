@@ -29,7 +29,7 @@ typedef enum {
 
 @interface OnigRegexp : NSObject
 {
-    regex_t* _entity;
+    onig_regex_t* _entity;
     NSString* _expression;
 }
 
