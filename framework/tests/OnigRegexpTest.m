@@ -7,17 +7,23 @@
 
 @implementation OnigRegexpTest
 
+- (void)assertRange:(NSRange) rangeOne equalToRange:(NSRange) rangeTwo
+{
+  XCTAssertEqual(rangeOne.location, rangeTwo.location);
+  XCTAssertEqual(rangeOne.length, rangeTwo.length);
+}
 - (void)testSurrogatePairs
 {
     OnigRegexp* e = [OnigRegexp compile:@"[^a-z0-9_\\s]"];
     OnigResult* r = [e search:[NSString stringWithUTF8String:"012_\xf0\xa3\x8f\x90 abc"]];
     
     XCTAssertNotNil(r);
-    XCTAssertEqual([r bodyRange], NSMakeRange(4,2));
+    [self assertRange:[r bodyRange] equalToRange:NSMakeRange(4,2)];
     XCTAssertEqualObjects([r body], [NSString stringWithUTF8String:"\xf0\xa3\x8f\x90"]);
     XCTAssertEqualObjects([r preMatch], @"012_");
     XCTAssertEqualObjects([r postMatch], @" abc");
 }
+
 
 - (void)testNamedCaptures
 {
@@ -25,7 +31,7 @@
     OnigResult* r = [e search:@"  012/345  \\t  abc##"];
     
     XCTAssertNotNil(r);
-    XCTAssertEqual(NSMakeRange(2,11), [r bodyRange]);
+    [self assertRange:NSMakeRange(2,11) equalToRange:[r bodyRange]];
     XCTAssertEqual([r count], (NSUInteger)4);
     XCTAssertEqual([r indexForName:@"digits"], (NSInteger)1);
     XCTAssertEqualObjects([r indexesForName:@"digits"], [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(1,2)]);
@@ -42,8 +48,8 @@
 {
     OnigRegexp* e = [OnigRegexp compile:@"[a-z]+"];
     OnigResult* r = [e search:@" 012xyz abc789"];
-    
-    XCTAssertEqual([r bodyRange], NSMakeRange(4,3));
+  
+    [self assertRange:[r bodyRange] equalToRange:NSMakeRange(4, 3)];
     XCTAssertEqualObjects([r body], @"xyz");
 }
 
@@ -51,19 +57,19 @@
 {
     OnigRegexp* e = [OnigRegexp compile:@"[a-z]+"];
     OnigResult* r = [e match:@"abcABC"];
-    
-    XCTAssertEqual(NSMakeRange(0,3), [r bodyRange]);
+
+    [self assertRange:NSMakeRange(0, 3) equalToRange:[r bodyRange]];
     XCTAssertEqualObjects(@"abc", [r body]);
 }
 
 - (void)testRangeOfRegexp
 {
-    XCTAssertEqual([@"" rangeOfRegexp:@"^"], NSMakeRange(0,0));
-    XCTAssertEqual([@"" rangeOfRegexp:[OnigRegexp compile:@"^"]], NSMakeRange(0,0));
-    XCTAssertEqual([@" 0 abc xyz" rangeOfRegexp:@"[a-z]+"], NSMakeRange(3,3));
-    XCTAssertEqual([@" 0 abc xyz" rangeOfRegexp:[OnigRegexp compile:@"[a-z]+"]], NSMakeRange(3,3));
-    XCTAssertEqual([@"abc" rangeOfRegexp:@"[^a-z]+"], NSMakeRange(NSNotFound,0));
-    XCTAssertEqual([@"abc" rangeOfRegexp:[OnigRegexp compile:@"[^a-z]+"]], NSMakeRange(NSNotFound,0));
+  [self assertRange:[@"" rangeOfRegexp:@"^"] equalToRange:NSMakeRange(0,0)];
+  [self assertRange:[@"" rangeOfRegexp:[OnigRegexp compile:@"^"]] equalToRange:NSMakeRange(0,0)];
+  [self assertRange:[@" 0 abc xyz" rangeOfRegexp:@"[a-z]+"] equalToRange:NSMakeRange(3,3)];
+  [self assertRange:[@" 0 abc xyz" rangeOfRegexp:[OnigRegexp compile:@"[a-z]+"]] equalToRange:NSMakeRange(3,3)];
+  [self assertRange:[@"abc" rangeOfRegexp:@"[^a-z]+"] equalToRange:NSMakeRange(NSNotFound,0)];
+  [self assertRange:[@"abc" rangeOfRegexp:[OnigRegexp compile:@"[^a-z]+"]] equalToRange:NSMakeRange(NSNotFound,0)];
 }
 
 // These tests are based on ruby 1.8's source code.
