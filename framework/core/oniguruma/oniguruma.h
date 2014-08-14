@@ -587,7 +587,7 @@ extern void onig_null_warn P_((const char* s));
 
 #define ONIG_CHAR_TABLE_SIZE   256
 
-/* regex_t state */
+/* onig_regex_t state */
 #define ONIG_STATE_NORMAL              0
 #define ONIG_STATE_SEARCHING           1
 #define ONIG_STATE_COMPILING          -1
@@ -636,14 +636,14 @@ typedef struct re_pattern_buffer {
   OnigDistance   dmin;                      /* min-distance of exact or map */
   OnigDistance   dmax;                      /* max-distance of exact or map */
 
-  /* regex_t link chain */
+  /* onig_regex_t link chain */
   struct re_pattern_buffer* chain;  /* escape compile-conflict */
 } OnigRegexType;
 
 typedef OnigRegexType*  OnigRegex;
 
 #ifndef ONIG_ESCAPE_REGEX_T_COLLISION
-  typedef OnigRegexType  regex_t;
+  typedef OnigRegexType  onig_regex_t;
 #endif
 
 
@@ -668,7 +668,7 @@ void onig_set_verb_warn_func P_((OnigWarnFunc f));
 ONIG_EXTERN
 int onig_new P_((OnigRegex*, const OnigUChar* pattern, const OnigUChar* pattern_end, OnigOptionType option, OnigEncoding enc, OnigSyntaxType* syntax, OnigErrorInfo* einfo));
 ONIG_EXTERN
-int  onig_reg_init P_((regex_t* reg, OnigOptionType option, OnigCaseFoldType case_fold_flag, OnigEncoding enc, OnigSyntaxType* syntax));
+int  onig_reg_init P_((onig_regex_t* reg, OnigOptionType option, OnigCaseFoldType case_fold_flag, OnigEncoding enc, OnigSyntaxType* syntax));
 int onig_new_without_alloc P_((OnigRegex, const OnigUChar* pattern, const OnigUChar* pattern_end, OnigOptionType option, OnigEncoding enc, OnigSyntaxType* syntax, OnigErrorInfo* einfo));
 ONIG_EXTERN
 int onig_new_deluxe P_((OnigRegex* reg, const OnigUChar* pattern, const OnigUChar* pattern_end, OnigCompileInfo* ci, OnigErrorInfo* einfo));

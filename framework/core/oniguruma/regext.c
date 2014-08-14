@@ -58,7 +58,7 @@ conv_encoding(OnigEncoding from, OnigEncoding to, const UChar* s, const UChar* e
 }
 
 extern int
-onig_new_deluxe(regex_t** reg, const UChar* pattern, const UChar* pattern_end,
+onig_new_deluxe(onig_regex_t** reg, const UChar* pattern, const UChar* pattern_end,
                 OnigCompileInfo* ci, OnigErrorInfo* einfo)
 {
   int r;
@@ -76,7 +76,7 @@ onig_new_deluxe(regex_t** reg, const UChar* pattern, const UChar* pattern_end,
     cpat_end = (UChar* )pattern_end;
   }
 
-  *reg = (regex_t* )xmalloc(sizeof(regex_t));
+  *reg = (onig_regex_t* )xmalloc(sizeof(onig_regex_t));
   if (IS_NULL(*reg)) {
     r = ONIGERR_MEMORY;
     goto err2;
@@ -101,11 +101,11 @@ onig_new_deluxe(regex_t** reg, const UChar* pattern, const UChar* pattern_end,
 
 #ifdef USE_RECOMPILE_API
 extern int
-onig_recompile_deluxe(regex_t* reg, const UChar* pattern, const UChar* pattern_end,
+onig_recompile_deluxe(onig_regex_t* reg, const UChar* pattern, const UChar* pattern_end,
                       OnigCompileInfo* ci, OnigErrorInfo* einfo)
 {
   int r;
-  regex_t *new_reg;
+  onig_regex_t *new_reg;
 
   r = onig_new_deluxe(&new_reg, pattern, pattern_end, ci, einfo);
   if (r) return r;
