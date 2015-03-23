@@ -104,6 +104,11 @@ static int captureNameCallback(const OnigUChar* name, const OnigUChar* end, int 
 
 + (OnigRegexp*)compile:(NSString*)expression options:(OnigOption)theOptions error:(NSError **)error
 {
+    return [self compile:expression options:theOptions syntax:ONIG_SYNTAX_DEFAULT error:error];
+}
+
++ (OnigRegexp*)compile:(NSString*)expression options:(OnigOption)theOptions syntax:(OnigSyntaxType *)syntax error:(NSError **)error
+{
     if (!expression) {
         if(error != NULL) {
             //Make NSError;
@@ -127,7 +132,7 @@ static int captureNameCallback(const OnigUChar* name, const OnigUChar* end, int 
                               str + [expression length] * CHAR_SIZE,
                               option,
                               ONIG_ENCODING,
-                              ONIG_SYNTAX_DEFAULT,
+                              syntax,
                               &err);
     }
     

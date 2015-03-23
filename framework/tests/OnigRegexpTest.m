@@ -13,7 +13,7 @@
     OnigResult* r = [e search:[NSString stringWithUTF8String:"012_\xf0\xa3\x8f\x90 abc"]];
     
     XCTAssertNotNil(r);
-    XCTAssertEqual([r bodyRange], NSMakeRange(4,2));
+    XCTAssert(NSEqualRanges([r bodyRange], NSMakeRange(4,2)));
     XCTAssertEqualObjects([r body], [NSString stringWithUTF8String:"\xf0\xa3\x8f\x90"]);
     XCTAssertEqualObjects([r preMatch], @"012_");
     XCTAssertEqualObjects([r postMatch], @" abc");
@@ -25,7 +25,7 @@
     OnigResult* r = [e search:@"  012/345  \\t  abc##"];
     
     XCTAssertNotNil(r);
-    XCTAssertEqual(NSMakeRange(2,11), [r bodyRange]);
+    XCTAssert(NSEqualRanges(NSMakeRange(2,11), [r bodyRange]));
     XCTAssertEqual([r count], (NSUInteger)4);
     XCTAssertEqual([r indexForName:@"digits"], (NSInteger)1);
     XCTAssertEqualObjects([r indexesForName:@"digits"], [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(1,2)]);
@@ -43,7 +43,7 @@
     OnigRegexp* e = [OnigRegexp compile:@"[a-z]+"];
     OnigResult* r = [e search:@" 012xyz abc789"];
     
-    XCTAssertEqual([r bodyRange], NSMakeRange(4,3));
+    XCTAssert(NSEqualRanges([r bodyRange], NSMakeRange(4,3)));
     XCTAssertEqualObjects([r body], @"xyz");
 }
 
@@ -52,18 +52,18 @@
     OnigRegexp* e = [OnigRegexp compile:@"[a-z]+"];
     OnigResult* r = [e match:@"abcABC"];
     
-    XCTAssertEqual(NSMakeRange(0,3), [r bodyRange]);
+    XCTAssert(NSEqualRanges(NSMakeRange(0,3), [r bodyRange]));
     XCTAssertEqualObjects(@"abc", [r body]);
 }
 
 - (void)testRangeOfRegexp
 {
-    XCTAssertEqual([@"" rangeOfRegexp:@"^"], NSMakeRange(0,0));
-    XCTAssertEqual([@"" rangeOfRegexp:[OnigRegexp compile:@"^"]], NSMakeRange(0,0));
-    XCTAssertEqual([@" 0 abc xyz" rangeOfRegexp:@"[a-z]+"], NSMakeRange(3,3));
-    XCTAssertEqual([@" 0 abc xyz" rangeOfRegexp:[OnigRegexp compile:@"[a-z]+"]], NSMakeRange(3,3));
-    XCTAssertEqual([@"abc" rangeOfRegexp:@"[^a-z]+"], NSMakeRange(NSNotFound,0));
-    XCTAssertEqual([@"abc" rangeOfRegexp:[OnigRegexp compile:@"[^a-z]+"]], NSMakeRange(NSNotFound,0));
+    XCTAssert(NSEqualRanges([@"" rangeOfRegexp:@"^"], NSMakeRange(0,0)));
+    XCTAssert(NSEqualRanges([@"" rangeOfRegexp:[OnigRegexp compile:@"^"]], NSMakeRange(0,0)));
+    XCTAssert(NSEqualRanges([@" 0 abc xyz" rangeOfRegexp:@"[a-z]+"], NSMakeRange(3,3)));
+    XCTAssert(NSEqualRanges([@" 0 abc xyz" rangeOfRegexp:[OnigRegexp compile:@"[a-z]+"]], NSMakeRange(3,3)));
+    XCTAssert(NSEqualRanges([@"abc" rangeOfRegexp:@"[^a-z]+"], NSMakeRange(NSNotFound,0)));
+    XCTAssert(NSEqualRanges([@"abc" rangeOfRegexp:[OnigRegexp compile:@"[^a-z]+"]], NSMakeRange(NSNotFound,0)));
 }
 
 // These tests are based on ruby 1.8's source code.
@@ -187,6 +187,29 @@
     XCTAssertNil(ret, @"Parsed expression");
     XCTAssertEqual([error code], (NSInteger)ONIGERR_UNDEFINED_GROUP_OPTION, @"Wrong error code");
     XCTAssertEqualObjects([error localizedDescription], @"undefined group option");
+}
+
+- (void)testSyntax
+{
+    NSError *error;
+    OnigRegexp* e = [OnigRegexp compile:@"[a-z]+" options:ONIG_OPTION_DEFAULT syntax:ONIG_SYNTAX_ASIS error:&error];
+    OnigResult* r = [e search:@" 012xyz abc789[a-z]+"];
+    XCTAssert(NSEqualRanges([r bodyRange], NSMakeRange(14,6)));
+    XCTAssertEqualObjects([r body], @"[a-z]+");
+    	
+    e = [OnigRegexp compile:@"[a-z]+" options:ONIG_OPTION_DEFAULT syntax:ONIG_SYNTAX_EMACS error:&error];
+    r = [e search:@" 012xyz abc789[a-z]+"];
+    XCTAssert(NSEqualRanges([r bodyRange], NSMakeRange(4,3)));
+    XCTAssertEqualObjects([r body], @"xyz");
+    
+    e = [OnigRegexp compile:@"[a-z]+" options:ONIG_OPTION_DEFAULT syntax:ONIG_SYNTAX_JAVA error:&error];
+    r = [e search:@" 012xyz abc789[a-z]+"];
+    XCTAssert(NSEqualRanges([r bodyRange], NSMakeRange(4,3)));
+    XCTAssertEqualObjects([r body], @"xyz");
+    int nextStart = (int)([r bodyRange].location + [r bodyRange].length);
+    r = [e search:@" 012xyz abc789[a-z]+" start:nextStart];
+    XCTAssert(NSEqualRanges([r bodyRange], NSMakeRange(8,3)));
+    XCTAssertEqualObjects([r body], @"abc");
 }
 
 @end
