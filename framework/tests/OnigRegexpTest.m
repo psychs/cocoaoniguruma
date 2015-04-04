@@ -196,11 +196,16 @@
     OnigResult* r = [e search:@" 012xyz abc789[a-z]+"];
     XCTAssert(NSEqualRanges([r bodyRange], NSMakeRange(14,6)));
     XCTAssertEqualObjects([r body], @"[a-z]+");
-    	
+    
     e = [OnigRegexp compile:@"[a-z]+" options:ONIG_OPTION_DEFAULT syntax:ONIG_SYNTAX_EMACS error:&error];
     r = [e search:@" 012xyz abc789[a-z]+"];
     XCTAssert(NSEqualRanges([r bodyRange], NSMakeRange(4,3)));
     XCTAssertEqualObjects([r body], @"xyz");
+    
+    e = [OnigRegexp compile:@"[[:digit:]]+" options:ONIG_OPTION_DEFAULT syntax:ONIG_SYNTAX_EMACS error:&error];
+    r = [e search:@" 012xyz abc789[a-z]+"];
+    XCTAssert(NSEqualRanges([r bodyRange], NSMakeRange(1,3)));
+    XCTAssertEqualObjects([r body], @"012");
     
     e = [OnigRegexp compile:@"[a-z]+" options:ONIG_OPTION_DEFAULT syntax:ONIG_SYNTAX_JAVA error:&error];
     r = [e search:@" 012xyz abc789[a-z]+"];
