@@ -32,7 +32,6 @@
 		7807AC520E2FBB8600A5AB6A /* st.h in Headers */ = {isa = PBXBuildFile; fileRef = 7807AC360E2FBB8600A5AB6A /* st.h */; };
 		78C5E1CD0E39CE5F00F62F5D /* OnigRegexpTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 78C5E1B70E39CDEE00F62F5D /* OnigRegexpTest.m */; };
 		78C5E21F0E39CF7300F62F5D /* CocoaOniguruma.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* CocoaOniguruma.framework */; };
-		78C5E2310E39CFEA00F62F5D /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C5E2300E39CFEA00F62F5D /* SenTestingKit.framework */; };
 		78C5E26C0E39D0BD00F62F5D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C5E26B0E39D0BD00F62F5D /* Foundation.framework */; };
 		78C5E3B10E39E38C00F62F5D /* CocoaOniguruma.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* CocoaOniguruma.framework */; };
 		78C5E3D00E39E42000F62F5D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 78C5E3C00E39E3D900F62F5D /* main.m */; };
@@ -87,7 +86,6 @@
 		78C5E1B60E39CDEE00F62F5D /* OnigRegexpTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OnigRegexpTest.h; path = tests/OnigRegexpTest.h; sourceTree = "<group>"; };
 		78C5E1B70E39CDEE00F62F5D /* OnigRegexpTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OnigRegexpTest.m; path = tests/OnigRegexpTest.m; sourceTree = "<group>"; };
 		78C5E1E70E39CEBD00F62F5D /* UnitTest-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "UnitTest-Info.plist"; sourceTree = "<group>"; };
-		78C5E2300E39CFEA00F62F5D /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = /Developer/Library/Frameworks/SenTestingKit.framework; sourceTree = "<absolute>"; };
 		78C5E26B0E39D0BD00F62F5D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		78C5E3A90E39E37F00F62F5D /* TestCommand */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestCommand; sourceTree = BUILT_PRODUCTS_DIR; };
 		78C5E3C00E39E3D900F62F5D /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = testcommand/main.m; sourceTree = "<group>"; };
@@ -101,7 +99,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				78C5E21F0E39CF7300F62F5D /* CocoaOniguruma.framework in Frameworks */,
-				78C5E2310E39CFEA00F62F5D /* SenTestingKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,7 +148,6 @@
 			isa = PBXGroup;
 			children = (
 				78C5E26B0E39D0BD00F62F5D /* Foundation.framework */,
-				78C5E2300E39CFEA00F62F5D /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -329,7 +325,7 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastTestingUpgradeCheck = 0510;
+				LastTestingUpgradeCheck = 0620;
 				LastUpgradeCheck = 0510;
 			};
 			buildConfigurationList = 1DEB91B108733DA50010E9CD /* Build configuration list for PBXProject "CocoaOniguruma" */;

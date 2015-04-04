@@ -43,6 +43,7 @@ typedef enum {
 + (OnigRegexp*)compile:(NSString*)expression ignorecase:(BOOL)ignorecase multiline:(BOOL)multiline extended:(BOOL)extended error:(NSError **)error;
 + (OnigRegexp*)compile:(NSString*)expression options:(OnigOption)options;
 + (OnigRegexp*)compile:(NSString*)expression options:(OnigOption)options error:(NSError **)error;
++ (OnigRegexp*)compile:(NSString*)expression options:(OnigOption)theOptions syntax:(OnigSyntaxType *)syntax error:(NSError **)error;
 
 - (OnigResult*)search:(NSString*)target;
 - (OnigResult*)search:(NSString*)target start:(int)start;

@@ -84,24 +84,24 @@ OnigSyntaxType OnigSyntaxPosixExtended = {
 };
 
 OnigSyntaxType OnigSyntaxEmacs = {
-  ( ONIG_SYN_OP_DOT_ANYCHAR | ONIG_SYN_OP_BRACKET_CC |
-    ONIG_SYN_OP_ESC_BRACE_INTERVAL |
-    ONIG_SYN_OP_ESC_LPAREN_SUBEXP | ONIG_SYN_OP_ESC_VBAR_ALT |
-    ONIG_SYN_OP_ASTERISK_ZERO_INF | ONIG_SYN_OP_PLUS_ONE_INF |
-    ONIG_SYN_OP_QMARK_ZERO_ONE | ONIG_SYN_OP_DECIMAL_BACKREF |
-    ONIG_SYN_OP_LINE_ANCHOR | ONIG_SYN_OP_ESC_CONTROL_CHARS )
-  , ONIG_SYN_OP2_ESC_GNU_BUF_ANCHOR
-  , ONIG_SYN_ALLOW_EMPTY_RANGE_IN_CC
-  , ONIG_OPTION_NONE
-  ,
-  {
-      (OnigCodePoint )'\\'                       /* esc */
-    , (OnigCodePoint )ONIG_INEFFECTIVE_META_CHAR /* anychar '.'  */
-    , (OnigCodePoint )ONIG_INEFFECTIVE_META_CHAR /* anytime '*'  */
-    , (OnigCodePoint )ONIG_INEFFECTIVE_META_CHAR /* zero or one time '?' */
-    , (OnigCodePoint )ONIG_INEFFECTIVE_META_CHAR /* one or more time '+' */
-    , (OnigCodePoint )ONIG_INEFFECTIVE_META_CHAR /* anychar anytime */
-  }
+    ( ONIG_SYN_OP_DOT_ANYCHAR | ONIG_SYN_OP_BRACKET_CC |
+     ONIG_SYN_OP_POSIX_BRACKET | ONIG_SYN_OP_ESC_BRACE_INTERVAL |
+     ONIG_SYN_OP_ESC_LPAREN_SUBEXP | ONIG_SYN_OP_ESC_VBAR_ALT |
+     ONIG_SYN_OP_ASTERISK_ZERO_INF | ONIG_SYN_OP_PLUS_ONE_INF |
+     ONIG_SYN_OP_QMARK_ZERO_ONE | ONIG_SYN_OP_DECIMAL_BACKREF |
+     ONIG_SYN_OP_LINE_ANCHOR | ONIG_SYN_OP_ESC_CONTROL_CHARS )
+    , ONIG_SYN_OP2_ESC_GNU_BUF_ANCHOR
+    , ONIG_SYN_ALLOW_EMPTY_RANGE_IN_CC
+    , ONIG_OPTION_NONE
+    ,
+    {
+        (OnigCodePoint )'\\'                       /* esc */
+        , (OnigCodePoint )ONIG_INEFFECTIVE_META_CHAR /* anychar '.'  */
+        , (OnigCodePoint )ONIG_INEFFECTIVE_META_CHAR /* anytime '*'  */
+        , (OnigCodePoint )ONIG_INEFFECTIVE_META_CHAR /* zero or one time '?' */
+        , (OnigCodePoint )ONIG_INEFFECTIVE_META_CHAR /* one or more time '+' */
+        , (OnigCodePoint )ONIG_INEFFECTIVE_META_CHAR /* anychar anytime */
+    }
 };
 
 OnigSyntaxType OnigSyntaxGrep = {
